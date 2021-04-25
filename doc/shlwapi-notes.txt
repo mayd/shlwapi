@@ -1,0 +1,47 @@
+_WIN32_IE=0x0700
+_WIN32_WINNT=0x602
+
+# 1013 "shlwapi.h" 3
+ extern __attribute__((dllimport))
+# 1013 "shlwapi.h"
+ HRESULT SHCreateStreamOnFileEx(LPCWSTR pszFile,DWORD grfMode, DWORD dwAttributes, WINBOOL fCreate,struct IStream *pstmTemplate, struct IStream **ppstm);
+
+
+
+    HMODULE hShlwapi = GetModuleHandleA("shlwapi.dll");
+    if (!hShlwapi)
+      hShlwapi = LoadLibrary(TEXT("shlwapi.dll"));
+    if (!hShlwapi) {
+      win_skip("Failed to load library 'shlwapi.dll'.");
+    return;
+    }
+
+/mingw64/x86_64-w64-mingw32/include/comdefsp.h
+/mingw64/x86_64-w64-mingw32/include/commctrl.h
+/mingw64/x86_64-w64-mingw32/include/icodecapi.h
+/mingw64/x86_64-w64-mingw32/include/mapival.h
+/mingw64/x86_64-w64-mingw32/include/mlang.h
+/mingw64/x86_64-w64-mingw32/include/objidl.h
+/mingw64/x86_64-w64-mingw32/include/objidlbase.h
+/mingw64/x86_64-w64-mingw32/include/scardssp.h
+
+
+# 956 "shlwapi.h" 3
+	typedef struct IQueryAssociations {
+		const struct IQueryAssociationsVtbl *lpVtbl;
+	} IQueryAssociations;
+
+	typedef const struct IQueryAssociationsVtbl IQueryAssociationsVtbl;
+
+	const struct IQueryAssociationsVtbl {
+   		HRESULT (*QueryInterface)(IQueryAssociations *This, const IID *const riid, void **ppv);
+    		ULONG (*AddRef) (IQueryAssociations *This);
+    		ULONG (*Release) (IQueryAssociations *This);
+   		HRESULT (*Init) (IQueryAssociations*This, ASSOCF flags, LPCWSTR pszAssoc, HKEY hkProgid, HWND hwnd);
+   		HRESULT (*GetString) (IQueryAssociations *This, ASSOCF flags, ASSOCSTR str,LPCWSTR pszExtra, LPWSTR pszOut, DWORD *pcchOut);
+  		HRESULT (GetKey) (IQueryAssociations *This, ASSOCF flags,ASSOCKEY key, LPCWSTR pszExtra, HKEY *phkeyOut);
+   		HRESULT (*GetData) (IQueryAssociations *This, ASSOCF flags, ASSOCDATA data, LPCWSTR pszExtra, LPVOID pvOut, DWORD *pcbOut);
+		HRESULT (*GetEnum) (IQueryAssociations *This, ASSOCF flags, ASSOCENUM assocenum, LPCWSTR pszExtra, const IID *const riid, LPVOID *ppvOut);
+	};
+# 976 "shlwapi.h" 3
+

@@ -1,0 +1,9 @@
+ASSOCDATA complete
+ASSOCKEY complete
+ASSOCSTR incomplete added
+FILETYPEATTRIBUTEFLAGS incomplete added
+SHGLOBALCOUNTER incomplete added
+SHREGDEL_FLAGS complete
+SHREGENUM_FLAGS complete
+tagSFBS_FLAGS incomplete added
+URL_SCHEME incomplete added

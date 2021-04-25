@@ -1,0 +1,5 @@
+DLLVERSIONINFO complete
+DLLVERSIONINFO2 complete
+PARSEDURLA incomplete added
+PARSEDURLW incomplete added
+QITAB complete
