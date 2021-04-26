@@ -18,3 +18,8 @@ The unit tests here were adapted from the unit tests for [The Wine Project](http
   * [thread.c](https://source.winehq.org/source/dlls/shlwapi/thread.c)
   * [url.c](https://source.winehq.org/source/dlls/shlwapi/url.c)
 
+To run the SHLWAPI unit tests run the following commands:
+
+  1. `make`
+  2. `make test`
+
