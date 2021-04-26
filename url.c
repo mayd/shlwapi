@@ -496,13 +496,13 @@ static void test_UrlApplyScheme(void)
         lstrcpyA(newurl, untouchedA);
         res = pUrlApplySchemeA(TEST_APPLY[i].url, newurl, &len, TEST_APPLY[i].flags);
         ok( res == TEST_APPLY[i].res,
-            "#%dA: got HRESULT 0x%x (expected 0x%x)\n", i, res, TEST_APPLY[i].res);
+            "#%ldA: got HRESULT 0x%lx (expected 0x%lx)\n", i, res, TEST_APPLY[i].res);
 
         ok( len == TEST_APPLY[i].newlen,
-            "#%dA: got len %d (expected %d)\n", i, len, TEST_APPLY[i].newlen);
+            "#%ldA: got len %ld (expected %ld)\n", i, len, TEST_APPLY[i].newlen);
 
         ok( !lstrcmpA(newurl, TEST_APPLY[i].newurl),
-            "#%dA: got '%s' (expected '%s')\n", i, newurl, TEST_APPLY[i].newurl);
+            "#%ldA: got '%s' (expected '%s')\n", i, newurl, TEST_APPLY[i].newurl);
 
         /* returned length is in character */
         len = TEST_APPLY_MAX_LENGTH;
@@ -513,13 +513,13 @@ static void test_UrlApplyScheme(void)
         res = pUrlApplySchemeW(urlW, newurlW, &len, TEST_APPLY[i].flags);
         WideCharToMultiByte(CP_ACP, 0, newurlW, -1, newurl, TEST_APPLY_MAX_LENGTH, NULL, NULL);
         ok( res == TEST_APPLY[i].res,
-            "#%dW: got HRESULT 0x%x (expected 0x%x)\n", i, res, TEST_APPLY[i].res);
+            "#%ldW: got HRESULT 0x%lx (expected 0x%lx)\n", i, res, TEST_APPLY[i].res);
 
         ok( len == TEST_APPLY[i].newlen,
-            "#%dW: got len %d (expected %d)\n", i, len, TEST_APPLY[i].newlen);
+            "#%ldW: got len %ld (expected %ld)\n", i, len, TEST_APPLY[i].newlen);
 
         ok( !lstrcmpA(newurl, TEST_APPLY[i].newurl),
-            "#%dW: got '%s' (expected '%s')\n", i, newurl, TEST_APPLY[i].newurl);
+            "#%ldW: got '%s' (expected '%s')\n", i, newurl, TEST_APPLY[i].newurl);
 
     }
 
@@ -527,28 +527,28 @@ static void test_UrlApplyScheme(void)
     lstrcpyA(newurl, untouchedA);
     len = lstrlenA(TEST_APPLY[0].newurl);
     res = pUrlApplySchemeA(TEST_APPLY[0].url, newurl, &len, TEST_APPLY[0].flags);
-    ok(res == E_POINTER, "got HRESULT 0x%x (expected E_POINTER)\n", res);
+    ok(res == E_POINTER, "got HRESULT 0x%lx (expected E_POINTER)\n", res);
     /* The returned length include the space for the terminating 0 */
     i = lstrlenA(TEST_APPLY[0].newurl)+1;
-    ok(len == i, "got len %d (expected %d)\n", len, i);
+    ok(len == i, "got len %ld (expected %ld)\n", len, i);
     ok(!lstrcmpA(newurl, untouchedA), "got '%s' (expected '%s')\n", newurl, untouchedA);
 
     /* NULL as parameter. The length and the buffer are not modified */
     lstrcpyA(newurl, untouchedA);
     len = TEST_APPLY_MAX_LENGTH;
     res = pUrlApplySchemeA(NULL, newurl, &len, TEST_APPLY[0].flags);
-    ok(res == E_INVALIDARG, "got HRESULT 0x%x (expected E_INVALIDARG)\n", res);
-    ok(len == TEST_APPLY_MAX_LENGTH, "got len %d\n", len);
+    ok(res == E_INVALIDARG, "got HRESULT 0x%lx (expected E_INVALIDARG)\n", res);
+    ok(len == TEST_APPLY_MAX_LENGTH, "got len %ld\n", len);
     ok(!lstrcmpA(newurl, untouchedA), "got '%s' (expected '%s')\n", newurl, untouchedA);
 
     len = TEST_APPLY_MAX_LENGTH;
     res = pUrlApplySchemeA(TEST_APPLY[0].url, NULL, &len, TEST_APPLY[0].flags);
-    ok(res == E_INVALIDARG, "got HRESULT 0x%x (expected E_INVALIDARG)\n", res);
-    ok(len == TEST_APPLY_MAX_LENGTH, "got len %d\n", len);
+    ok(res == E_INVALIDARG, "got HRESULT 0x%lx (expected E_INVALIDARG)\n", res);
+    ok(len == TEST_APPLY_MAX_LENGTH, "got len %ld\n", len);
 
     lstrcpyA(newurl, untouchedA);
     res = pUrlApplySchemeA(TEST_APPLY[0].url, newurl, NULL, TEST_APPLY[0].flags);
-    ok(res == E_INVALIDARG, "got HRESULT 0x%x (expected E_INVALIDARG)\n", res);
+    ok(res == E_INVALIDARG, "got HRESULT 0x%lx (expected E_INVALIDARG)\n", res);
     ok(!lstrcmpA(newurl, untouchedA), "got '%s' (expected '%s')\n", newurl, untouchedA);
 
 }
@@ -564,12 +564,12 @@ static void hash_url(const char* szUrl)
   DWORD cbSize = sizeof(DWORD);
   DWORD dwHash1, dwHash2;
   res = pUrlHashA(szTestUrl, (LPBYTE)&dwHash1, cbSize);
-  ok(res == S_OK, "UrlHashA returned 0x%x (expected S_OK) for %s\n", res, szUrl);
+  ok(res == S_OK, "UrlHashA returned 0x%lx (expected S_OK) for %s\n", res, szUrl);
   if (pUrlHashW) {
     res = pUrlHashW(wszTestUrl, (LPBYTE)&dwHash2, cbSize);
-    ok(res == S_OK, "UrlHashW returned 0x%x (expected S_OK) for %s\n", res, szUrl);
+    ok(res == S_OK, "UrlHashW returned 0x%lx (expected S_OK) for %s\n", res, szUrl);
     ok(dwHash1 == dwHash2,
-        "Hashes didn't match (A: 0x%x, W: 0x%x) for %s\n", dwHash1, dwHash2, szUrl);
+        "Hashes didn't match (A: 0x%lx, W: 0x%lx) for %s\n", dwHash1, dwHash2, szUrl);
   }
   FreeWideString(wszTestUrl);
 
@@ -600,21 +600,21 @@ static void test_url_part(const char* szUrl, DWORD dwPart, DWORD dwFlags, const 
 
   dwSize = 1;
   res = pUrlGetPartA(szUrl, szPart, &dwSize, dwPart, dwFlags);
-  ok(res == E_POINTER, "UrlGetPart for \"%s\" gave: 0x%08x\n", szUrl, res);
+  ok(res == E_POINTER, "UrlGetPart for \"%s\" gave: 0x%08lx\n", szUrl, res);
   ok(dwSize == strlen(szExpected)+1 ||
           (*szExpected == '?' && dwSize == strlen(szExpected)),
-          "UrlGetPart for \"%s\" gave size: %u\n", szUrl, dwSize);
+          "UrlGetPart for \"%s\" gave size: %lu\n", szUrl, dwSize);
 
   dwSize = INTERNET_MAX_URL_LENGTH;
   res = pUrlGetPartA(szUrl, szPart, &dwSize, dwPart, dwFlags);
   ok(res == S_OK,
-    "UrlGetPartA for \"%s\" part 0x%08x returned 0x%x and \"%s\"\n",
+    "UrlGetPartA for \"%s\" part 0x%08lx returned 0x%lx and \"%s\"\n",
     szUrl, dwPart, res, szPart);
   if (pUrlGetPartW) {
     dwSize = INTERNET_MAX_URL_LENGTH;
     res = pUrlGetPartW(wszUrl, wszPart, &dwSize, dwPart, dwFlags);
     ok(res == S_OK,
-      "UrlGetPartW for \"%s\" part 0x%08x returned 0x%x\n",
+      "UrlGetPartW for \"%s\" part 0x%08lx returned 0x%lx\n",
       szUrl, dwPart, res);
 
     wszConvertedPart = GetWideString(szPart);
@@ -654,30 +654,30 @@ static void test_UrlGetPart(void)
   }
 
   res = pUrlGetPartA(NULL, NULL, NULL, URL_PART_SCHEME, 0);
-  ok(res == E_INVALIDARG, "null params gave: 0x%08x\n", res);
+  ok(res == E_INVALIDARG, "null params gave: 0x%08lx\n", res);
 
   res = pUrlGetPartA(NULL, szPart, &dwSize, URL_PART_SCHEME, 0);
-  ok(res == E_INVALIDARG, "null URL gave: 0x%08x\n", res);
+  ok(res == E_INVALIDARG, "null URL gave: 0x%08lx\n", res);
 
   res = pUrlGetPartA(res_url, NULL, &dwSize, URL_PART_SCHEME, 0);
-  ok(res == E_INVALIDARG, "null szPart gave: 0x%08x\n", res);
+  ok(res == E_INVALIDARG, "null szPart gave: 0x%08lx\n", res);
 
   res = pUrlGetPartA(res_url, szPart, NULL, URL_PART_SCHEME, 0);
-  ok(res == E_INVALIDARG, "null URL gave: 0x%08x\n", res);
+  ok(res == E_INVALIDARG, "null URL gave: 0x%08lx\n", res);
 
   dwSize = 0;
   szPart[0]='x'; szPart[1]=0;
   res = pUrlGetPartA("hi", szPart, &dwSize, URL_PART_SCHEME, 0);
-  ok(res == E_INVALIDARG, "UrlGetPartA(*pcchOut = 0) returned %08X\n", res);
+  ok(res == E_INVALIDARG, "UrlGetPartA(*pcchOut = 0) returned %08lX\n", res);
   ok(szPart[0] == 'x' && szPart[1] == 0, "UrlGetPartA(*pcchOut = 0) modified szPart: \"%s\"\n", szPart);
-  ok(dwSize == 0, "dwSize = %d\n", dwSize);
+  ok(dwSize == 0, "dwSize = %ld\n", dwSize);
 
   dwSize = sizeof szPart;
   szPart[0]='x'; szPart[1]=0;
   res = pUrlGetPartA("hi", szPart, &dwSize, URL_PART_SCHEME, 0);
-  ok (res==S_FALSE, "UrlGetPartA(\"hi\") returned %08X\n", res);
+  ok (res==S_FALSE, "UrlGetPartA(\"hi\") returned %08lX\n", res);
   ok(szPart[0]==0, "UrlGetPartA(\"hi\") return \"%s\" instead of \"\"\n", szPart);
-  ok(dwSize == 0, "dwSize = %d\n", dwSize);
+  ok(dwSize == 0, "dwSize = %ld\n", dwSize);
 
   if(pUrlGetPartW)
   {
@@ -688,17 +688,17 @@ static void test_UrlGetPart(void)
       dwSize = sizeof szPart;
       bufW[0]='x'; bufW[1]=0;
       res = pUrlGetPartW(hiW, bufW, &dwSize, URL_PART_SCHEME, 0);
-      todo_wine ok(res==S_OK, "UrlGetPartW(\"hi\") returned %08X\n", res);
+      todo_wine ok(res==S_OK, "UrlGetPartW(\"hi\") returned %08lX\n", res);
       ok(bufW[0] == 0, "UrlGetPartW(\"hi\") return \"%c\"\n", bufW[0]);
-      ok(dwSize == 0, "dwSize = %d\n", dwSize);
+      ok(dwSize == 0, "dwSize = %ld\n", dwSize);
   }
 
   dwSize = sizeof szPart;
   szPart[0]='x'; szPart[1]=0;
   res = pUrlGetPartA("hi", szPart, &dwSize, URL_PART_QUERY, 0);
-  ok (res==S_FALSE, "UrlGetPartA(\"hi\") returned %08X\n", res);
+  ok (res==S_FALSE, "UrlGetPartA(\"hi\") returned %08lX\n", res);
   ok(szPart[0]==0, "UrlGetPartA(\"hi\") return \"%s\" instead of \"\"\n", szPart);
-  ok(dwSize == 0, "dwSize = %d\n", dwSize);
+  ok(dwSize == 0, "dwSize = %ld\n", dwSize);
 
   test_url_part(TEST_URL_3, URL_PART_HOSTNAME, 0, "localhost");
   test_url_part(TEST_URL_3, URL_PART_PORT, 0, "21");
@@ -722,7 +722,7 @@ static void test_UrlGetPart(void)
 
   dwSize = sizeof(szPart);
   res = pUrlGetPartA(about_url, szPart, &dwSize, URL_PART_HOSTNAME, 0);
-  ok(res==E_FAIL, "returned %08x\n", res);
+  ok(res==E_FAIL, "returned %08lx\n", res);
 
   test_url_part(res_url, URL_PART_SCHEME, 0, "res");
   test_url_part("http://www.winehq.org", URL_PART_HOSTNAME, URL_PARTFLAG_KEEPSCHEME, "http:www.winehq.org");
@@ -730,54 +730,54 @@ static void test_UrlGetPart(void)
   dwSize = sizeof szPart;
   szPart[0]='x'; szPart[1]=0;
   res = pUrlGetPartA(res_url, szPart, &dwSize, URL_PART_QUERY, 0);
-  ok(res==S_FALSE, "UrlGetPartA returned %08X\n", res);
+  ok(res==S_FALSE, "UrlGetPartA returned %08lX\n", res);
   ok(szPart[0]==0, "UrlGetPartA gave \"%s\" instead of \"\"\n", szPart);
-  ok(dwSize == 0, "dwSize = %d\n", dwSize);
+  ok(dwSize == 0, "dwSize = %ld\n", dwSize);
 
   dwSize = sizeof(szPart);
   res = pUrlGetPartA("file://c:\\index.htm", szPart, &dwSize, URL_PART_HOSTNAME, 0);
-  ok(res==S_FALSE, "returned %08x\n", res);
-  ok(dwSize == 0, "dwSize = %d\n", dwSize);
+  ok(res==S_FALSE, "returned %08lx\n", res);
+  ok(dwSize == 0, "dwSize = %ld\n", dwSize);
 
   dwSize = sizeof(szPart);
   szPart[0] = 'x'; szPart[1] = '\0';
   res = pUrlGetPartA("file:some text", szPart, &dwSize, URL_PART_HOSTNAME, 0);
-  ok(res==S_FALSE, "returned %08x\n", res);
+  ok(res==S_FALSE, "returned %08lx\n", res);
   ok(szPart[0] == '\0', "szPart[0] = %c\n", szPart[0]);
-  ok(dwSize == 0, "dwSize = %d\n", dwSize);
+  ok(dwSize == 0, "dwSize = %ld\n", dwSize);
 
   dwSize = sizeof(szPart);
   szPart[0] = 'x'; szPart[1] = '\0';
   res = pUrlGetPartA("index.htm", szPart, &dwSize, URL_PART_HOSTNAME, 0);
-  ok(res==E_FAIL, "returned %08x\n", res);
+  ok(res==E_FAIL, "returned %08lx\n", res);
 
   dwSize = sizeof(szPart);
   szPart[0] = 'x'; szPart[1] = '\0';
   res = pUrlGetPartA(excid_url, szPart, &dwSize, URL_PART_HOSTNAME, 0);
-  ok(res==E_FAIL, "returned %08x\n", res);
+  ok(res==E_FAIL, "returned %08lx\n", res);
   ok(szPart[0] == 'x', "szPart[0] = %c\n", szPart[0]);
-  ok(dwSize == sizeof(szPart), "dwSize = %d\n", dwSize);
+  ok(dwSize == sizeof(szPart), "dwSize = %ld\n", dwSize);
 
   dwSize = sizeof(szPart);
   szPart[0] = 'x'; szPart[1] = '\0';
   res = pUrlGetPartA(excid_url, szPart, &dwSize, URL_PART_QUERY, 0);
-  ok(res==S_FALSE, "returned %08x\n", res);
+  ok(res==S_FALSE, "returned %08lx\n", res);
   ok(szPart[0] == 0, "szPart[0] = %c\n", szPart[0]);
-  ok(dwSize == 0, "dwSize = %d\n", dwSize);
+  ok(dwSize == 0, "dwSize = %ld\n", dwSize);
 
   dwSize = sizeof(szPart);
   szPart[0] = 'x'; szPart[1] = '\0';
   res = pUrlGetPartA(foo_url, szPart, &dwSize, URL_PART_HOSTNAME, 0);
-  ok(res==E_FAIL, "returned %08x\n", res);
+  ok(res==E_FAIL, "returned %08lx\n", res);
   ok(szPart[0] == 'x', "szPart[0] = %c\n", szPart[0]);
-  ok(dwSize == sizeof(szPart), "dwSize = %d\n", dwSize);
+  ok(dwSize == sizeof(szPart), "dwSize = %ld\n", dwSize);
 
   dwSize = sizeof(szPart);
   szPart[0] = 'x'; szPart[1] = '\0';
   res = pUrlGetPartA(foo_url, szPart, &dwSize, URL_PART_QUERY, 0);
-  ok(res==S_FALSE, "returned %08x\n", res);
+  ok(res==S_FALSE, "returned %08lx\n", res);
   ok(szPart[0] == 0, "szPart[0] = %c\n", szPart[0]);
-  ok(dwSize == 0, "dwSize = %d\n", dwSize);
+  ok(dwSize == 0, "dwSize = %ld\n", dwSize);
 }
 
 /* ########################### */
@@ -794,23 +794,23 @@ static void test_url_canonicalize(int index, const char *szUrl, DWORD dwFlags, H
 
     dwSize = INTERNET_MAX_URL_LENGTH;
     ret = pUrlCanonicalizeA(szUrl, NULL, &dwSize, dwFlags);
-    ok(ret != dwExpectReturn, "got 0s%x: Unexpected return for NULL buffer, index %d\n", ret, index);
+    ok(ret != dwExpectReturn, "got 0x%lx: Unexpected return for NULL buffer, index %d\n", ret, index);
     ret = pUrlCanonicalizeA(szUrl, szReturnUrl, &dwSize, dwFlags);
     ok(ret == dwExpectReturn || ret == dwExpectReturnAlt,
-       "UrlCanonicalizeA failed: expected=0x%08x or 0x%08x, got=0x%08x, index %d\n",
+       "UrlCanonicalizeA failed: expected=0x%08lx or 0x%08lx, got=0x%08lx, index %d\n",
        dwExpectReturn, dwExpectReturnAlt, ret, index);
     if (todo)
         todo_wine
-        ok(strcmp(szReturnUrl,szExpectUrl)==0, "UrlCanonicalizeA dwFlags 0x%08x url '%s' Expected \"%s\", but got \"%s\", index %d\n", dwFlags, szUrl, szExpectUrl, szReturnUrl, index);
+        ok(strcmp(szReturnUrl,szExpectUrl)==0, "UrlCanonicalizeA dwFlags 0x%08lx url '%s' Expected \"%s\", but got \"%s\", index %d\n", dwFlags, szUrl, szExpectUrl, szReturnUrl, index);
     else
-        ok(strcmp(szReturnUrl,szExpectUrl)==0, "UrlCanonicalizeA dwFlags 0x%08x url '%s' Expected \"%s\", but got \"%s\", index %d\n", dwFlags, szUrl, szExpectUrl, szReturnUrl, index);
+        ok(strcmp(szReturnUrl,szExpectUrl)==0, "UrlCanonicalizeA dwFlags 0x%08lx url '%s' Expected \"%s\", but got \"%s\", index %d\n", dwFlags, szUrl, szExpectUrl, szReturnUrl, index);
 
     if (pUrlCanonicalizeW) {
         dwSize = INTERNET_MAX_URL_LENGTH;
         ret = pUrlCanonicalizeW(wszUrl, NULL, &dwSize, dwFlags);
-        ok(ret != dwExpectReturn, "got 0x%x: Unexpected return for NULL buffer, index %d\n", ret, index);
+        ok(ret != dwExpectReturn, "got 0x%lx: Unexpected return for NULL buffer, index %d\n", ret, index);
         ret = pUrlCanonicalizeW(wszUrl, wszReturnUrl, &dwSize, dwFlags);
-        ok(ret == dwExpectReturn, "UrlCanonicalizeW failed: expected 0x%08x, got 0x%x, index %d\n",
+        ok(ret == dwExpectReturn, "UrlCanonicalizeW failed: expected 0x%08lx, got 0x%lx, index %d\n",
             dwExpectReturn, ret, index);
 
         wszConvertedUrl = GetWideString(szReturnUrl);
@@ -837,29 +837,29 @@ static void test_UrlEscapeA(void)
     }
 
     ret = pUrlEscapeA("/woningplan/woonkamer basis.swf", NULL, &size, URL_ESCAPE_SPACES_ONLY);
-    ok(ret == E_INVALIDARG, "got %x, expected %x\n", ret, E_INVALIDARG);
-    ok(size == 0, "got %d, expected %d\n", size, 0);
+    ok(ret == E_INVALIDARG, "got %lx, expected %lx\n", ret, E_INVALIDARG);
+    ok(size == 0, "got %ld, expected %d\n", size, 0);
 
     size = 0;
     ret = pUrlEscapeA("/woningplan/woonkamer basis.swf", empty_string, &size, URL_ESCAPE_SPACES_ONLY);
-    ok(ret == E_INVALIDARG, "got %x, expected %x\n", ret, E_INVALIDARG);
-    ok(size == 0, "got %d, expected %d\n", size, 0);
+    ok(ret == E_INVALIDARG, "got %lx, expected %lx\n", ret, E_INVALIDARG);
+    ok(size == 0, "got %ld, expected %d\n", size, 0);
 
     size = 1;
     ret = pUrlEscapeA("/woningplan/woonkamer basis.swf", NULL, &size, URL_ESCAPE_SPACES_ONLY);
-    ok(ret == E_INVALIDARG, "got %x, expected %x\n", ret, E_INVALIDARG);
-    ok(size == 1, "got %d, expected %d\n", size, 1);
+    ok(ret == E_INVALIDARG, "got %lx, expected %lx\n", ret, E_INVALIDARG);
+    ok(size == 1, "got %ld, expected %d\n", size, 1);
 
     size = 1;
     ret = pUrlEscapeA("/woningplan/woonkamer basis.swf", empty_string, NULL, URL_ESCAPE_SPACES_ONLY);
-    ok(ret == E_INVALIDARG, "got %x, expected %x\n", ret, E_INVALIDARG);
-    ok(size == 1, "got %d, expected %d\n", size, 1);
+    ok(ret == E_INVALIDARG, "got %lx, expected %lx\n", ret, E_INVALIDARG);
+    ok(size == 1, "got %ld, expected %d\n", size, 1);
 
     size = 1;
     empty_string[0] = 127;
     ret = pUrlEscapeA("/woningplan/woonkamer basis.swf", empty_string, &size, URL_ESCAPE_SPACES_ONLY);
-    ok(ret == E_POINTER, "got %x, expected %x\n", ret, E_POINTER);
-    ok(size == 34, "got %d, expected %d\n", size, 34);
+    ok(ret == E_POINTER, "got %lx, expected %lx\n", ret, E_POINTER);
+    ok(size == 34, "got %ld, expected %d\n", size, 34);
     ok(empty_string[0] == 127, "String has changed, empty_string[0] = %d\n", empty_string[0]);
 
     for(i=0; i<sizeof(TEST_ESCAPE)/sizeof(TEST_ESCAPE[0]); i++) {
@@ -867,7 +867,7 @@ static void test_UrlEscapeA(void)
 
         size = INTERNET_MAX_URL_LENGTH;
         ret = pUrlEscapeA(TEST_ESCAPE[i].url, ret_url, &size, TEST_ESCAPE[i].flags);
-        ok(ret == TEST_ESCAPE[i].expectret, "UrlEscapeA returned 0x%08x instead of 0x%08x for \"%s\"\n",
+        ok(ret == TEST_ESCAPE[i].expectret, "UrlEscapeA returned 0x%08lx instead of 0x%08lx for \"%s\"\n",
             ret, TEST_ESCAPE[i].expectret, TEST_ESCAPE[i].url);
         ok(!strcmp(ret_url, TEST_ESCAPE[i].expecturl), "Expected \"%s\", but got \"%s\" for \"%s\"\n",
             TEST_ESCAPE[i].expecturl, ret_url, TEST_ESCAPE[i].url);
@@ -893,21 +893,21 @@ static void test_UrlEscapeW(void)
 
     size = sizeof(overwrite)/sizeof(WCHAR);
     ret = pUrlEscapeW(overwrite, overwrite, &size, URL_ESCAPE_SPACES_ONLY);
-    ok(ret == S_OK, "got %x, expected S_OK\n", ret);
-    ok(size == 9, "got %d, expected 9\n", size);
+    ok(ret == S_OK, "got %lx, expected S_OK\n", ret);
+    ok(size == 9, "got %ld, expected 9\n", size);
     ok(!lstrcmpW(overwrite, out), "got %s, expected %s\n", wine_dbgstr_w(overwrite), wine_dbgstr_w(out));
 
     size = 1;
     wc = 127;
     ret = pUrlEscapeW(overwrite, &wc, &size, URL_ESCAPE_SPACES_ONLY);
-    ok(ret == E_POINTER, "got %x, expected %x\n", ret, E_POINTER);
-    ok(size == 10, "got %d, expected 10\n", size);
+    ok(ret == E_POINTER, "got %lx, expected %lx\n", ret, E_POINTER);
+    ok(size == 10, "got %ld, expected 10\n", size);
     ok(wc == 127, "String has changed, wc = %d\n", wc);
 
     /* non-ASCII range */
     size = sizeof(ret_urlW)/sizeof(WCHAR);
     ret = pUrlEscapeW(naW, ret_urlW, &size, 0);
-    ok(ret == S_OK, "got %x, expected S_OK\n", ret);
+    ok(ret == S_OK, "got %lx, expected S_OK\n", ret);
     ok(!lstrcmpW(naescapedW, ret_urlW), "got %s, expected %s\n", wine_dbgstr_w(ret_urlW), wine_dbgstr_w(naescapedW));
 
     for (i = 0; i < sizeof(TEST_ESCAPE)/sizeof(TEST_ESCAPE[0]); i++) {
@@ -918,9 +918,9 @@ static void test_UrlEscapeW(void)
         urlW = GetWideString(TEST_ESCAPE[i].url);
         expected_urlW = GetWideString(TEST_ESCAPE[i].expecturl);
         ret = pUrlEscapeW(urlW, ret_urlW, &size, TEST_ESCAPE[i].flags);
-        ok(ret == TEST_ESCAPE[i].expectret, "UrlEscapeW returned 0x%08x instead of 0x%08x for %s\n",
+        ok(ret == TEST_ESCAPE[i].expectret, "UrlEscapeW returned 0x%08lx instead of 0x%08lx for %s\n",
            ret, TEST_ESCAPE[i].expectret, wine_dbgstr_w(urlW));
-        ok(!lstrcmpW(ret_urlW, expected_urlW), "Expected %s, but got %s for %s flags %08x\n",
+        ok(!lstrcmpW(ret_urlW, expected_urlW), "Expected %s, but got %s for %s flags %08lx\n",
             wine_dbgstr_w(expected_urlW), wine_dbgstr_w(ret_urlW), wine_dbgstr_w(urlW), TEST_ESCAPE[i].flags);
         FreeWideString(urlW);
         FreeWideString(expected_urlW);
@@ -952,7 +952,7 @@ static void test_UrlCanonicalizeA(void)
     SetLastError(0xdeadbeef);
     hr = pUrlCanonicalizeA(winehqA, szReturnUrl, &dwSize, URL_WININET_COMPATIBILITY  | URL_ESCAPE_UNSAFE);
     ok( (hr == E_POINTER) && (dwSize == (urllen + 1)),
-        "got 0x%x with %u and size %u for '%s' and %u (expected 'E_POINTER' and size %u)\n",
+        "got 0x%lx with %lu and size %lu for '%s' and %u (expected 'E_POINTER' and size %lu)\n",
         hr, GetLastError(), dwSize, szReturnUrl, lstrlenA(szReturnUrl), urllen+1);
 
     /* buffer has no space for the terminating '\0' */
@@ -962,7 +962,7 @@ static void test_UrlCanonicalizeA(void)
     SetLastError(0xdeadbeef);
     hr = pUrlCanonicalizeA(winehqA, szReturnUrl, &dwSize, URL_WININET_COMPATIBILITY | URL_ESCAPE_UNSAFE);
     ok( (hr == E_POINTER) && (dwSize == (urllen + 1)),
-        "got 0x%x with %u and size %u for '%s' and %u (expected 'E_POINTER' and size %u)\n",
+        "got 0x%lx with %lu and size %lu for '%s' and %u (expected 'E_POINTER' and size %lu)\n",
         hr, GetLastError(), dwSize, szReturnUrl, lstrlenA(szReturnUrl), urllen+1);
 
     /* buffer has the required size */
@@ -972,7 +972,7 @@ static void test_UrlCanonicalizeA(void)
     SetLastError(0xdeadbeef);
     hr = pUrlCanonicalizeA(winehqA, szReturnUrl, &dwSize, URL_WININET_COMPATIBILITY | URL_ESCAPE_UNSAFE);
     ok( (hr == S_OK) && (dwSize == urllen),
-        "got 0x%x with %u and size %u for '%s' and %u (expected 'S_OK' and size %u)\n",
+        "got 0x%lx with %lu and size %lu for '%s' and %u (expected 'S_OK' and size %lu)\n",
         hr, GetLastError(), dwSize, szReturnUrl, lstrlenA(szReturnUrl), urllen);
 
     /* buffer is larger as the required size */
@@ -982,7 +982,7 @@ static void test_UrlCanonicalizeA(void)
     SetLastError(0xdeadbeef);
     hr = pUrlCanonicalizeA(winehqA, szReturnUrl, &dwSize, URL_WININET_COMPATIBILITY | URL_ESCAPE_UNSAFE);
     ok( (hr == S_OK) && (dwSize == urllen),
-        "got 0x%x with %u and size %u for '%s' and %u (expected 'S_OK' and size %u)\n",
+        "got 0x%lx with %lu and size %lu for '%s' and %u (expected 'S_OK' and size %lu)\n",
         hr, GetLastError(), dwSize, szReturnUrl, lstrlenA(szReturnUrl), urllen);
 
     /* length is set to 0 */
@@ -992,8 +992,8 @@ static void test_UrlCanonicalizeA(void)
     SetLastError(0xdeadbeef);
     hr = pUrlCanonicalizeA(winehqA, szReturnUrl, &dwSize, URL_WININET_COMPATIBILITY | URL_ESCAPE_UNSAFE);
     ok( (hr == E_INVALIDARG) && (dwSize == 0),
-            "got 0x%x with %u and size %u for '%s' and %u (expected 'E_INVALIDARG' and size %u)\n",
-            hr, GetLastError(), dwSize, szReturnUrl, lstrlenA(szReturnUrl), 0);
+            "got 0x%lx with %lu and size %lu for '%s' and %u (expected 'E_INVALIDARG' and size %lu)\n",
+            hr, GetLastError(), dwSize, szReturnUrl, lstrlenA(szReturnUrl), (unsigned long)0);
 
     /* url length > INTERNET_MAX_URL_SIZE */
     dwSize=sizeof(szReturnUrl);
@@ -1001,7 +1001,7 @@ static void test_UrlCanonicalizeA(void)
     memcpy(longurl, winehqA, sizeof(winehqA)-1);
     longurl[sizeof(longurl)-1] = '\0';
     hr = pUrlCanonicalizeA(longurl, szReturnUrl, &dwSize, URL_WININET_COMPATIBILITY | URL_ESCAPE_UNSAFE);
-    ok(hr == S_OK, "hr = %x\n", hr);
+    ok(hr == S_OK, "hr = %lx\n", hr);
 
     test_url_canonicalize(-1, "", 0, S_OK, S_FALSE /* Vista/win2k8 */, "", FALSE);
 
@@ -1037,7 +1037,7 @@ static void test_UrlCanonicalizeW(void)
     SetLastError(0xdeadbeef);
     hr = pUrlCanonicalizeW(winehqW, szReturnUrl, &dwSize, URL_WININET_COMPATIBILITY | URL_ESCAPE_UNSAFE);
     ok( (hr == E_POINTER) && (dwSize == (urllen + 1)),
-        "got 0x%x with %u and size %u for %u (expected 'E_POINTER' and size %u)\n",
+        "got 0x%lx with %lu and size %lu for %u (expected 'E_POINTER' and size %lu)\n",
         hr, GetLastError(), dwSize, lstrlenW(szReturnUrl), urllen+1);
 
 
@@ -1048,7 +1048,7 @@ static void test_UrlCanonicalizeW(void)
     SetLastError(0xdeadbeef);
     hr = pUrlCanonicalizeW(winehqW, szReturnUrl, &dwSize, URL_WININET_COMPATIBILITY | URL_ESCAPE_UNSAFE);
     ok( (hr == E_POINTER) && (dwSize == (urllen + 1)),
-        "got 0x%x with %u and size %u for %u (expected 'E_POINTER' and size %u)\n",
+        "got 0x%lx with %lu and size %lu for %u (expected 'E_POINTER' and size %lu)\n",
         hr, GetLastError(), dwSize, lstrlenW(szReturnUrl), urllen+1);
 
     /* buffer has the required size */
@@ -1058,7 +1058,7 @@ static void test_UrlCanonicalizeW(void)
     SetLastError(0xdeadbeef);
     hr = pUrlCanonicalizeW(winehqW, szReturnUrl, &dwSize, URL_WININET_COMPATIBILITY | URL_ESCAPE_UNSAFE);
     ok( (hr == S_OK) && (dwSize == urllen),
-        "got 0x%x with %u and size %u for %u (expected 'S_OK' and size %u)\n",
+        "got 0x%lx with %lu and size %lu for %u (expected 'S_OK' and size %lu)\n",
         hr, GetLastError(), dwSize, lstrlenW(szReturnUrl), urllen);
 
     /* buffer is larger as the required size */
@@ -1068,7 +1068,7 @@ static void test_UrlCanonicalizeW(void)
     SetLastError(0xdeadbeef);
     hr = pUrlCanonicalizeW(winehqW, szReturnUrl, &dwSize, URL_WININET_COMPATIBILITY | URL_ESCAPE_UNSAFE);
     ok( (hr == S_OK) && (dwSize == urllen),
-        "got 0x%x with %u and size %u for %u (expected 'S_OK' and size %u)\n",
+        "got 0x%lx with %lu and size %lu for %u (expected 'S_OK' and size %lu)\n",
         hr, GetLastError(), dwSize, lstrlenW(szReturnUrl), urllen);
 
     /* check that the characters 1..32 are chopped from the end of the string */
@@ -1110,21 +1110,21 @@ static void test_url_combine(const char *szUrl1, const char *szUrl2, DWORD dwFla
     wszExpectUrl = GetWideString(szExpectUrl);
 
     hr = pUrlCombineA(szUrl1, szUrl2, NULL, NULL, dwFlags);
-    ok(hr == E_INVALIDARG, "UrlCombineA returned 0x%08x, expected 0x%08x\n", hr, E_INVALIDARG);
+    ok(hr == E_INVALIDARG, "UrlCombineA returned 0x%08lx, expected 0x%08lx\n", hr, E_INVALIDARG);
 
     dwSize = 0;
     hr = pUrlCombineA(szUrl1, szUrl2, NULL, &dwSize, dwFlags);
-    ok(hr == E_POINTER, "Checking length of string, return was 0x%08x, expected 0x%08x\n", hr, E_POINTER);
-    ok(dwSize == dwExpectLen+1, "Got length %d, expected %d\n", dwSize, dwExpectLen+1);
+    ok(hr == E_POINTER, "Checking length of string, return was 0x%08lx, expected 0x%08lx\n", hr, E_POINTER);
+    ok(dwSize == dwExpectLen+1, "Got length %ld, expected %ld\n", dwSize, dwExpectLen+1);
 
     dwSize--;
     hr = pUrlCombineA(szUrl1, szUrl2, szReturnUrl, &dwSize, dwFlags);
-    ok(hr == E_POINTER, "UrlCombineA returned 0x%08x, expected 0x%08x\n", hr, E_POINTER);
-    ok(dwSize == dwExpectLen+1, "Got length %d, expected %d\n", dwSize, dwExpectLen+1);
+    ok(hr == E_POINTER, "UrlCombineA returned 0x%08lx, expected 0x%08lx\n", hr, E_POINTER);
+    ok(dwSize == dwExpectLen+1, "Got length %ld, expected %ld\n", dwSize, dwExpectLen+1);
 
     hr = pUrlCombineA(szUrl1, szUrl2, szReturnUrl, &dwSize, dwFlags);
-    ok(hr == dwExpectReturn, "UrlCombineA returned 0x%08x, expected 0x%08x\n", hr, dwExpectReturn);
-    ok(dwSize == dwExpectLen, "Got length %d, expected %d\n", dwSize, dwExpectLen);
+    ok(hr == dwExpectReturn, "UrlCombineA returned 0x%08lx, expected 0x%08lx\n", hr, dwExpectReturn);
+    ok(dwSize == dwExpectLen, "Got length %ld, expected %ld\n", dwSize, dwExpectLen);
     if(SUCCEEDED(hr)) {
         ok(strcmp(szReturnUrl,szExpectUrl)==0, "Expected %s, but got %s\n", szExpectUrl, szReturnUrl);
     }
@@ -1132,17 +1132,17 @@ static void test_url_combine(const char *szUrl1, const char *szUrl2, DWORD dwFla
     if (pUrlCombineW) {
         dwSize = 0;
         hr = pUrlCombineW(wszUrl1, wszUrl2, NULL, &dwSize, dwFlags);
-        ok(hr == E_POINTER, "Checking length of string, return was 0x%08x, expected 0x%08x\n", hr, E_POINTER);
-        ok(dwSize == dwExpectLen+1, "Got length %d, expected %d\n", dwSize, dwExpectLen+1);
+        ok(hr == E_POINTER, "Checking length of string, return was 0x%08lx, expected 0x%08lx\n", hr, E_POINTER);
+        ok(dwSize == dwExpectLen+1, "Got length %ld, expected %ld\n", dwSize, dwExpectLen+1);
 
         dwSize--;
         hr = pUrlCombineW(wszUrl1, wszUrl2, wszReturnUrl, &dwSize, dwFlags);
-        ok(hr == E_POINTER, "UrlCombineW returned 0x%08x, expected 0x%08x\n", hr, E_POINTER);
-        ok(dwSize == dwExpectLen+1, "Got length %d, expected %d\n", dwSize, dwExpectLen+1);
+        ok(hr == E_POINTER, "UrlCombineW returned 0x%08lx, expected 0x%08lx\n", hr, E_POINTER);
+        ok(dwSize == dwExpectLen+1, "Got length %ld, expected %ld\n", dwSize, dwExpectLen+1);
 
         hr = pUrlCombineW(wszUrl1, wszUrl2, wszReturnUrl, &dwSize, dwFlags);
-        ok(hr == dwExpectReturn, "UrlCombineW returned 0x%08x, expected 0x%08x\n", hr, dwExpectReturn);
-        ok(dwSize == dwExpectLen, "Got length %d, expected %d\n", dwSize, dwExpectLen);
+        ok(hr == dwExpectReturn, "UrlCombineW returned 0x%08lx, expected 0x%08lx\n", hr, dwExpectReturn);
+        ok(dwSize == dwExpectLen, "Got length %ld, expected %ld\n", dwSize, dwExpectLen);
         if(SUCCEEDED(hr)) {
             wszConvertedUrl = GetWideString(szReturnUrl);
             ok(lstrcmpW(wszReturnUrl, wszConvertedUrl)==0, "Strings didn't match between ascii and unicode UrlCombine!\n");
@@ -1184,9 +1184,9 @@ static void test_UrlCreateFromPath(void)
     for(i = 0; i < sizeof(TEST_URLFROMPATH) / sizeof(TEST_URLFROMPATH[0]); i++) {
         len = INTERNET_MAX_URL_LENGTH;
         ret = pUrlCreateFromPathA(TEST_URLFROMPATH[i].path, ret_url, &len, 0);
-        ok(ret == TEST_URLFROMPATH[i].ret, "ret %08x from path %s\n", ret, TEST_URLFROMPATH[i].path);
+        ok(ret == TEST_URLFROMPATH[i].ret, "ret %08lx from path %s\n", ret, TEST_URLFROMPATH[i].path);
         ok(!lstrcmpiA(ret_url, TEST_URLFROMPATH[i].url), "url %s from path %s\n", ret_url, TEST_URLFROMPATH[i].path);
-        ok(len == strlen(ret_url), "ret len %d from path %s\n", len, TEST_URLFROMPATH[i].path);
+        ok(len == strlen(ret_url), "ret len %ld from path %s\n", len, TEST_URLFROMPATH[i].path);
 
         if (pUrlCreateFromPathW) {
             len = INTERNET_MAX_URL_LENGTH;
@@ -1194,11 +1194,11 @@ static void test_UrlCreateFromPath(void)
             urlW = GetWideString(TEST_URLFROMPATH[i].url);
             ret = pUrlCreateFromPathW(pathW, ret_urlW, &len, 0);
             WideCharToMultiByte(CP_ACP, 0, ret_urlW, -1, ret_url, sizeof(ret_url),0,0);
-            ok(ret == TEST_URLFROMPATH[i].ret, "ret %08x from path L\"%s\", expected %08x\n",
+            ok(ret == TEST_URLFROMPATH[i].ret, "ret %08lx from path L\"%s\", expected %08lx\n",
                 ret, TEST_URLFROMPATH[i].path, TEST_URLFROMPATH[i].ret);
             ok(!lstrcmpiW(ret_urlW, urlW), "got %s expected %s from path L\"%s\"\n",
                 ret_url, TEST_URLFROMPATH[i].url, TEST_URLFROMPATH[i].path);
-            ok(len == lstrlenW(ret_urlW), "ret len %d from path L\"%s\"\n", len, TEST_URLFROMPATH[i].path);
+            ok(len == lstrlenW(ret_urlW), "ret len %ld from path L\"%s\"\n", len, TEST_URLFROMPATH[i].path);
             FreeWideString(urlW);
             FreeWideString(pathW);
         }
@@ -1211,9 +1211,9 @@ static void test_UrlIs_null(DWORD flag)
 {
     BOOL ret;
     ret = pUrlIsA(NULL, flag);
-    ok(ret == FALSE, "pUrlIsA(NULL, %d) failed\n", flag);
+    ok(ret == FALSE, "pUrlIsA(NULL, %ld) failed\n", flag);
     ret = pUrlIsW(NULL, flag);
-    ok(ret == FALSE, "pUrlIsW(NULL, %d) failed\n", flag);
+    ok(ret == FALSE, "pUrlIsW(NULL, %ld) failed\n", flag);
 }
 
 static void test_UrlIs(void)
@@ -1300,7 +1300,7 @@ static void test_UrlUnescape(void)
         dwEscaped=INTERNET_MAX_URL_LENGTH;
         res = pUrlUnescapeA(TEST_URL_UNESCAPE[i].url, szReturnUrl, &dwEscaped, 0);
         ok(res == S_OK,
-            "UrlUnescapeA returned 0x%x (expected S_OK) for \"%s\"\n",
+            "UrlUnescapeA returned 0x%lx (expected S_OK) for \"%s\"\n",
             res, TEST_URL_UNESCAPE[i].url);
         ok(strcmp(szReturnUrl,TEST_URL_UNESCAPE[i].expect)==0, "Expected \"%s\", but got \"%s\" from \"%s\"\n", TEST_URL_UNESCAPE[i].expect, szReturnUrl, TEST_URL_UNESCAPE[i].url);
 
@@ -1308,7 +1308,7 @@ static void test_UrlUnescape(void)
         /* if we set the buffer pointer to NULL here, UrlUnescape fails and the string is not converted */
         res = pUrlUnescapeA(TEST_URL_UNESCAPE[i].url, szReturnUrl, NULL, 0);
         ok(res == E_INVALIDARG,
-            "UrlUnescapeA returned 0x%x (expected E_INVALIDARG) for \"%s\"\n",
+            "UrlUnescapeA returned 0x%lx (expected E_INVALIDARG) for \"%s\"\n",
             res, TEST_URL_UNESCAPE[i].url);
         ok(strcmp(szReturnUrl,"")==0, "Expected empty string\n");
 
@@ -1318,7 +1318,7 @@ static void test_UrlUnescape(void)
             expected_urlW = GetWideString(TEST_URL_UNESCAPE[i].expect);
             res = pUrlUnescapeW(urlW, ret_urlW, &dwEscaped, 0);
             ok(res == S_OK,
-                "UrlUnescapeW returned 0x%x (expected S_OK) for \"%s\"\n",
+                "UrlUnescapeW returned 0x%lx (expected S_OK) for \"%s\"\n",
                 res, TEST_URL_UNESCAPE[i].url);
 
             WideCharToMultiByte(CP_ACP,0,ret_urlW,-1,szReturnUrl,INTERNET_MAX_URL_LENGTH,0,0);
@@ -1332,24 +1332,24 @@ static void test_UrlUnescape(void)
 
     dwEscaped = sizeof(inplace);
     res = pUrlUnescapeA(inplace, NULL, &dwEscaped, URL_UNESCAPE_INPLACE);
-    ok(res == S_OK, "UrlUnescapeA returned 0x%x (expected S_OK)\n", res);
+    ok(res == S_OK, "UrlUnescapeA returned 0x%lx (expected S_OK)\n", res);
     ok(!strcmp(inplace, expected), "got %s expected %s\n", inplace, expected);
-    ok(dwEscaped == 27, "got %d expected 27\n", dwEscaped);
+    ok(dwEscaped == 27, "got %ld expected 27\n", dwEscaped);
 
     /* if we set the buffer pointer to NULL, the string apparently still gets converted (Google Lively does this) */
     res = pUrlUnescapeA(another_inplace, NULL, NULL, URL_UNESCAPE_INPLACE);
-    ok(res == S_OK, "UrlUnescapeA returned 0x%x (expected S_OK)\n", res);
+    ok(res == S_OK, "UrlUnescapeA returned 0x%lx (expected S_OK)\n", res);
     ok(!strcmp(another_inplace, expected), "got %s expected %s\n", another_inplace, expected);
 
     if (pUrlUnescapeW) {
         dwEscaped = sizeof(inplaceW);
         res = pUrlUnescapeW(inplaceW, NULL, &dwEscaped, URL_UNESCAPE_INPLACE);
-        ok(res == S_OK, "UrlUnescapeW returned 0x%x (expected S_OK)\n", res);
-        ok(dwEscaped == 50, "got %d expected 50\n", dwEscaped);
+        ok(res == S_OK, "UrlUnescapeW returned 0x%lx (expected S_OK)\n", res);
+        ok(dwEscaped == 50, "got %ld expected 50\n", dwEscaped);
 
         /* if we set the buffer pointer to NULL, the string apparently still gets converted (Google Lively does this) */
         res = pUrlUnescapeW(another_inplaceW, NULL, NULL, URL_UNESCAPE_INPLACE);
-        ok(res == S_OK, "UrlUnescapeW returned 0x%x (expected S_OK)\n", res);
+        ok(res == S_OK, "UrlUnescapeW returned 0x%lx (expected S_OK)\n", res);
 
         ok(lstrlenW(another_inplaceW) == 24, "got %d expected 24\n", lstrlenW(another_inplaceW));
     }
@@ -1389,7 +1389,7 @@ static void test_ParseURL(void)
         memset(&parseda, 0xd0, sizeof(parseda));
         parseda.cbSize = sizeof(parseda);
         hres = pParseURLA(test->url, &parseda);
-        ok(hres == test->hres, "ParseURL failed: %08x, expected %08x\n", hres, test->hres);
+        ok(hres == test->hres, "ParseURL failed: %08lx, expected %08lx\n", hres, test->hres);
         if(hres == S_OK) {
             ok(parseda.pszProtocol == test->url, "parseda.pszProtocol = %s, expected %s\n",
                parseda.pszProtocol, test->url);
@@ -1412,7 +1412,7 @@ static void test_ParseURL(void)
         memset(&parsedw, 0xd0, sizeof(parsedw));
         parsedw.cbSize = sizeof(parsedw);
         hres = pParseURLW(url, &parsedw);
-        ok(hres == test->hres, "ParseURL failed: %08x, expected %08x\n", hres, test->hres);
+        ok(hres == test->hres, "ParseURL failed: %08lx, expected %08lx\n", hres, test->hres);
         if(hres == S_OK) {
             ok(parsedw.pszProtocol == url, "parsedw.pszProtocol = %s, expected %s\n",
                wine_dbgstr_w(parsedw.pszProtocol), wine_dbgstr_w(url));
@@ -1453,21 +1453,21 @@ static void test_HashData(void)
 
     /* Test hashing with identically sized input/output buffers. */
     res = pHashData(input, 16, output, 16);
-    ok(res == S_OK, "Expected HashData to return S_OK, got 0x%08x\n", res);
+    ok(res == S_OK, "Expected HashData to return S_OK, got 0x%08lx\n", res);
     if(res == S_OK)
        ok(!memcmp(output, expected, sizeof(expected)),
           "Output buffer did not match expected contents\n");
 
     /* Test hashing with larger output buffer. */
     res = pHashData(input, 16, output, 32);
-    ok(res == S_OK, "Expected HashData to return S_OK, got 0x%08x\n", res);
+    ok(res == S_OK, "Expected HashData to return S_OK, got 0x%08lx\n", res);
     if(res == S_OK)
        ok(!memcmp(output, expected2, sizeof(expected2)),
           "Output buffer did not match expected contents\n");
 
     /* Test hashing with smaller input buffer. */
     res = pHashData(input, 8, output, 16);
-    ok(res == S_OK, "Expected HashData to return S_OK, got 0x%08x\n", res);
+    ok(res == S_OK, "Expected HashData to return S_OK, got 0x%08lx\n", res);
     if(res == S_OK)
        ok(!memcmp(output, expected3, sizeof(expected3)),
           "Output buffer did not match expected contents\n");
@@ -1475,15 +1475,15 @@ static void test_HashData(void)
     /* Test passing NULL pointers for input/output parameters. */
     res = pHashData(NULL, 0, NULL, 0);
     ok(res == E_INVALIDARG || broken(res == S_OK), /* Windows 2000 */
-       "Expected HashData to return E_INVALIDARG, got 0x%08x\n", res);
+       "Expected HashData to return E_INVALIDARG, got 0x%08lx\n", res);
 
     res = pHashData(input, 0, NULL, 0);
     ok(res == E_INVALIDARG || broken(res == S_OK), /* Windows 2000 */
-       "Expected HashData to return E_INVALIDARG, got 0x%08x\n", res);
+       "Expected HashData to return E_INVALIDARG, got 0x%08lx\n", res);
 
     res = pHashData(NULL, 0, output, 0);
     ok(res == E_INVALIDARG || broken(res == S_OK), /* Windows 2000 */
-       "Expected HashData to return E_INVALIDARG, got 0x%08x\n", res);
+       "Expected HashData to return E_INVALIDARG, got 0x%08lx\n", res);
 
     /* Test passing valid pointers with sizes of zero. */
     for (i = 0; i < sizeof(input)/sizeof(BYTE); i++)
@@ -1493,7 +1493,7 @@ static void test_HashData(void)
         output[i] = 0xFF;
 
     res = pHashData(input, 0, output, 0);
-    ok(res == S_OK, "Expected HashData to return S_OK, got 0x%08x\n", res);
+    ok(res == S_OK, "Expected HashData to return S_OK, got 0x%08lx\n", res);
 
     /* The buffers should be unchanged. */
     for (i = 0; i < sizeof(input)/sizeof(BYTE); i++)
@@ -1510,12 +1510,12 @@ static void test_HashData(void)
 
     /* Input/output parameters are not validated. */
     res = pHashData((BYTE *)0xdeadbeef, 0, (BYTE *)0xdeadbeef, 0);
-    ok(res == S_OK, "Expected HashData to return S_OK, got 0x%08x\n", res);
+    ok(res == S_OK, "Expected HashData to return S_OK, got 0x%08lx\n", res);
 
     if (0)
     {
         res = pHashData((BYTE *)0xdeadbeef, 1, (BYTE *)0xdeadbeef, 1);
-        trace("HashData returned 0x%08x\n", res);
+        trace("HashData returned 0x%08lx\n", res);
     }
 }
 

@@ -967,7 +967,7 @@ LWSTDAPI PathMatchSpecExW(LPCWSTR pszFile, LPCWSTR pszSpec, DWORD dwFlags);
     STDMETHOD (GetEnum)(THIS_ ASSOCF flags,ASSOCENUM assocenum,LPCWSTR pszExtra,REFIID riid,LPVOID *ppvOut) PURE;
 
     END_INTERFACE
-  };
+  } IQueryAssociations_Type;
 
 #define AssocQueryString __MINGW_NAME_AW(AssocQueryString)
 #define AssocQueryStringByKey __MINGW_NAME_AW(AssocQueryStringByKey)
@@ -1334,10 +1334,8 @@ LWSTDAPI_(BOOL) IsOS(DWORD dwOS);
   LWSTDAPI IUnknown_SetSite(IUnknown *punk, IUnknown *punkSite);
   LWSTDAPI IUnknown_GetSite(IUnknown *punk, REFIID riid, void **ppv);
   LWSTDAPI IUnknown_QueryService(IUnknown *punk, REFGUID guidService, REFIID riid, void **ppvOut);
-#ifndef IStream_Read 
+#ifndef COBJMACROS
   LWSTDAPI IStream_Read(IStream *pstm, void *pv, ULONG cb);
-#endif
-#ifndef IStream_Write
   LWSTDAPI IStream_Write(IStream *pstm, const void *pv, ULONG cb);
 #endif
   LWSTDAPI IStream_Reset(IStream *pstm);

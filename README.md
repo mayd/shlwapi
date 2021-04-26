@@ -2,9 +2,9 @@
 
 This repository contains my version of the C include file `shlwapi.h` for MSYS2/MinGW and some unit test code.
 
-The definitive documentation for the SHWAPI library is [shlwapi.h header](https://docs.microsoft.com/en-us/windows/win32/api/shlwapi/).
+The definitive documentation for the SHLWAPI library is [shlwapi.h header](https://docs.microsoft.com/en-us/windows/win32/api/shlwapi/).
 
-The unit tests here were adapted from the unit tests for [The Wine Project](https://www.winehq.org/) implementation of SHLWAPI.
+The unit tests here were adapted from the unit tests for [The Wine Project](https://www.winehq.org/) implementation of SHLWAPI:
 
   * [assoc.c](https://source.winehq.org/source/dlls/shlwapi/assoc.c)
   * [clist.c](https://source.winehq.org/source/dlls/shlwapi/clist.c)

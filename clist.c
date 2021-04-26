@@ -238,7 +238,7 @@ static BOOL InitFunctionPtrs(void)
     SHLWAPI_hshlwapi = LoadLibrary(TEXT("shlwapi.dll"));
   if (!SHLWAPI_hshlwapi) {
     win_skip("Failed to load library 'shlwapi.dll'.");
-    return;
+    return FALSE;
   }
 
   /* SHCreateStreamOnFileEx was introduced in shlwapi v6.0 */
@@ -342,7 +342,7 @@ static void test_CList(void)
       else if (inserted)
       {
         ok(inserted->ulSize==item->ulSize+sizeof(SHLWAPI_CLIST),
-           "id %d wrong size %d\n", inserted->ulId, inserted->ulSize);
+           "id %ld wrong size %ld\n", inserted->ulId, inserted->ulSize);
       }
       if (inserted)
       {
@@ -465,7 +465,7 @@ static void test_CList(void)
       else if (inserted)
       {
         ok(inserted->ulSize==item->ulSize+sizeof(SHLWAPI_CLIST),
-           "id %d wrong size %d\n", inserted->ulId, inserted->ulSize);
+           "id %ld wrong size %ld\n", inserted->ulId, inserted->ulSize);
       }
       ok(!inserted || inserted->ulId==item->ulId, "find got wrong item\n");
       if (inserted)

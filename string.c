@@ -37,7 +37,7 @@
 
 #define expect_eq2(expr, val1, val2, type, fmt) do { \
     type ret = expr; \
-    ok(ret == val1 || ret == val2, "Unexpected value of '" #expr "': " #fmt " instead of " #val1 " or " #val2 "\n", ret); \
+    ok(ret == val1 || ret == val2, "Unexpected value of '" #expr "': " #fmt " instead of " #val1 " or " #val2 "\n", (unsigned int)(ret)); \
 } while (0);
 
 static BOOL    (WINAPI *pChrCmpIA)(CHAR, CHAR);
@@ -569,7 +569,7 @@ static void test_StrToInt64ExA(void)
     ok(!bRet || return_val != -1, "No result returned from '%s'\n",
        result->string);
     if (bRet)
-      ok(return_val == result->str_to_int64_ex, "converted '%s' wrong (%08x%08x)\n",
+      ok(return_val == result->str_to_int64_ex, "converted '%s' wrong (%08lx%08lx)\n",
          result->string, (DWORD)(return_val >> 32), (DWORD)return_val);
     result++;
   }
@@ -582,7 +582,7 @@ static void test_StrToInt64ExA(void)
     ok(!bRet || return_val != -1, "No result returned from '%s'\n",
        result->string);
     if (bRet)
-      ok(return_val == result->str_to_int64_hex, "converted '%s' wrong (%08x%08x)\n",
+      ok(return_val == result->str_to_int64_hex, "converted '%s' wrong (%08lx%08lx)\n",
          result->string, (DWORD)(return_val >> 32), (DWORD)return_val);
     result++;
   }
@@ -609,7 +609,7 @@ static void test_StrToInt64ExW(void)
     ok(!bRet || return_val != -1, "No result returned from '%s'\n",
        result->string);
     if (bRet)
-      ok(return_val == result->str_to_int64_ex, "converted '%s' wrong (%08x%08x)\n",
+      ok(return_val == result->str_to_int64_ex, "converted '%s' wrong (%08lx%08lx)\n",
          result->string, (DWORD)(return_val >> 32), (DWORD)return_val);
     result++;
   }
@@ -623,7 +623,7 @@ static void test_StrToInt64ExW(void)
     ok(!bRet || return_val != -1, "No result returned from '%s'\n",
        result->string);
     if (bRet)
-      ok(return_val == result->str_to_int64_hex, "converted '%s' wrong (%08x%08x)\n",
+      ok(return_val == result->str_to_int64_hex, "converted '%s' wrong (%08lx%08lx)\n",
          result->string, (DWORD)(return_val >> 32), (DWORD)return_val);
     result++;
   }
@@ -671,7 +671,7 @@ static void test_StrFormatByteSize64A(void)
     pStrFormatByteSize64A(result->value, szBuff, 256);
 
     ok(!strcmp(result->byte_size_64, szBuff),
-        "Formatted %x%08x wrong: got %s, expected %s\n",
+        "Formatted %lx%08lx wrong: got %s, expected %s\n",
        (LONG)(result->value >> 32), (LONG)result->value, szBuff, result->byte_size_64);
 
     result++;
@@ -695,7 +695,7 @@ static void test_StrFormatKBSizeW(void)
     pStrFormatKBSizeW(result->value, szBuffW, 256);
     WideCharToMultiByte(CP_ACP,0,szBuffW,-1,szBuff,sizeof(szBuff)/sizeof(WCHAR),NULL,NULL);
 
-    ok(!strcmp(result->kb_size, szBuff), "Formatted %x%08x wrong: got %s, expected %s\n",
+    ok(!strcmp(result->kb_size, szBuff), "Formatted %lx%08lx wrong: got %s, expected %s\n",
        (LONG)(result->value >> 32), (LONG)result->value, szBuff, result->kb_size);
     result++;
   }
@@ -720,7 +720,7 @@ static void test_StrFormatKBSizeA(void)
      * and does not correctly handle extremely large values. */
     ok(!strcmp(result->kb_size, szBuff) ||
       (result->kb_size_broken && !strcmp(result->kb_size2, szBuff)),
-        "Formatted %x%08x wrong: got %s, expected %s\n",
+        "Formatted %lx%08lx wrong: got %s, expected %s\n",
        (LONG)(result->value >> 32), (LONG)result->value, szBuff, result->kb_size);
     result++;
   }
@@ -735,7 +735,7 @@ static void test_StrFromTimeIntervalA(void)
   {
     StrFromTimeIntervalA(szBuff, 256, result->ms, result->digits);
 
-    ok(!strcmp(result->time_interval, szBuff), "Formatted %d %d wrong: %s\n",
+    ok(!strcmp(result->time_interval, szBuff), "Formatted %ld %d wrong: %s\n",
        result->ms, result->digits, szBuff);
     result++;
   }
@@ -830,14 +830,14 @@ static void test_StrRetToBSTR(void)
     bstr = 0;
     ret = pStrRetToBSTR(&strret, NULL, &bstr);
     ok(ret == S_OK && bstr && !strcmpW(bstr, szTestW),
-       "STRRET_WSTR: dup failed, ret=0x%08x, bstr %p\n", ret, bstr);
+       "STRRET_WSTR: dup failed, ret=0x%08lx, bstr %p\n", ret, bstr);
     SysFreeString(bstr);
 
     strret.uType = STRRET_CSTR;
     lstrcpyA(U(strret).cStr, "Test");
     ret = pStrRetToBSTR(&strret, NULL, &bstr);
     ok(ret == S_OK && bstr && !strcmpW(bstr, szTestW),
-       "STRRET_CSTR: dup failed, ret=0x%08x, bstr %p\n", ret, bstr);
+       "STRRET_CSTR: dup failed, ret=0x%08lx, bstr %p\n", ret, bstr);
     SysFreeString(bstr);
 
     strret.uType = STRRET_OFFSET;
@@ -845,7 +845,7 @@ static void test_StrRetToBSTR(void)
     strcpy((char*)&iidl, " Test");
     ret = pStrRetToBSTR(&strret, iidl, &bstr);
     ok(ret == S_OK && bstr && !strcmpW(bstr, szTestW),
-       "STRRET_OFFSET: dup failed, ret=0x%08x, bstr %p\n", ret, bstr);
+       "STRRET_OFFSET: dup failed, ret=0x%08lx, bstr %p\n", ret, bstr);
     SysFreeString(bstr);
 
     /* Native crashes if str is NULL */
@@ -950,7 +950,7 @@ static void test_SHAnsiToAnsi(void)
   memset(dest, '\n', sizeof(dest));
   dwRet = pSHAnsiToAnsi("hello", dest, sizeof(dest)/sizeof(dest[0]));
   ok(dwRet == 6 && !memcmp(dest, "hello\0\n\n", sizeof(dest)),
-     "SHAnsiToAnsi: expected 6, \"hello\\0\\n\\n\", got %d, \"%d,%d,%d,%d,%d,%d,%d,%d\"\n",
+     "SHAnsiToAnsi: expected 6, \"hello\\0\\n\\n\", got %ld, \"%d,%d,%d,%d,%d,%d,%d,%d\"\n",
      dwRet, dest[0], dest[1], dest[2], dest[3], dest[4], dest[5], dest[6], dest[7]);
 }
 
@@ -977,7 +977,7 @@ static void test_SHUnicodeToUnicode(void)
   memcpy(dest, lpInit, sizeof(lpInit));
   dwRet = pSHUnicodeToUnicode(lpSrc, dest, sizeof(dest)/sizeof(dest[0]));
   ok(dwRet == 6 && !memcmp(dest, lpRes, sizeof(dest)),
-     "SHUnicodeToUnicode: expected 6, \"hello\\0\\n\\n\", got %d, \"%d,%d,%d,%d,%d,%d,%d,%d\"\n",
+     "SHUnicodeToUnicode: expected 6, \"hello\\0\\n\\n\", got %ld, \"%d,%d,%d,%d,%d,%d,%d,%d\"\n",
      dwRet, dest[0], dest[1], dest[2], dest[3], dest[4], dest[5], dest[6], dest[7]);
 }
 

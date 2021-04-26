@@ -455,12 +455,12 @@ void winetest_wait_child_process( HANDLE process )
     {
         if (exit_code > 255)
         {
-            fprintf( stdout, "%s: exception 0x%08x in child process\n", current_test->name, exit_code );
+            fprintf( stdout, "%s: exception 0x%08lx in child process\n", current_test->name, exit_code );
             InterlockedIncrement( &failures );
         }
         else
         {
-            fprintf( stdout, "%s: %u failures in child process\n",
+            fprintf( stdout, "%s: %lu failures in child process\n",
                      current_test->name, exit_code );
             while (exit_code-- > 0)
                 InterlockedIncrement(&failures);
@@ -530,7 +530,7 @@ const char *wine_dbgstr_guid( const GUID *guid )
 
     if (!guid) return "(null)";
     res = get_temp_buffer( 39 ); /* CHARS_IN_GUID */
-    sprintf( res, "{%08x-%04x-%04x-%02x%02x-%02x%02x%02x%02x%02x%02x}",
+    sprintf( res, "{%08lx-%04x-%04x-%02x%02x-%02x%02x%02x%02x%02x%02x}",
              guid->Data1, guid->Data2, guid->Data3, guid->Data4[0],
              guid->Data4[1], guid->Data4[2], guid->Data4[3], guid->Data4[4],
              guid->Data4[5], guid->Data4[6], guid->Data4[7] );
@@ -585,7 +585,7 @@ static int run_test( const char *name )
 
     if (winetest_debug)
     {
-        fprintf( stdout, "%s: %d tests executed (%d marked as todo, %d %s), %d skipped.\n",
+        fprintf( stdout, "%s: %ld tests executed (%ld marked as todo, %ld %s), %ld skipped.\n",
                  test->name, successes + failures + todo_successes + todo_failures,
                  todo_successes, failures + todo_failures,
                  (failures + todo_failures != 1) ? "failures" : "failure",
@@ -612,7 +612,7 @@ static LONG CALLBACK exc_filter( EXCEPTION_POINTERS *ptrs )
     if (data->current_file)
         fprintf( stdout, "%s:%d: this is the last test seen before the exception\n",
                  data->current_file, data->current_line );
-    fprintf( stdout, "%s: unhandled exception %08x at %p\n", current_test->name,
+    fprintf( stdout, "%s: unhandled exception %08lx at %p\n", current_test->name,
              ptrs->ExceptionRecord->ExceptionCode, ptrs->ExceptionRecord->ExceptionAddress );
     fflush( stdout );
     return EXCEPTION_EXECUTE_HANDLER;

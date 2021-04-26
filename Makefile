@@ -18,7 +18,8 @@ $(TARGETS): % : %.o
 .PHONY: clean test
 
 test:
-	(printf "ASSOC\n"; ./assoc; printf "\n"; \
+	@(printf "DEFINES\n"; ./defines; printf "\n"; \
+	printf "ASSOC\n"; ./assoc; printf "\n"; \
 	printf "CLIST\n"; ./clist; printf "\n"; \
 	printf "CLSID\n"; ./clsid; printf "\n"; \
 	printf "GENERATED\n"; ./generated; printf "\n"; \
