@@ -1526,7 +1526,7 @@ START_TEST(string)
   pIntlStrEqWorkerA = (void *)GetProcAddress(hShlwapi, "IntlStrEqWorkerA");
   pIntlStrEqWorkerW = (void *)GetProcAddress(hShlwapi, "IntlStrEqWorkerW");
   pSHAnsiToAnsi = (void *)GetProcAddress(hShlwapi, MAKEINTRESOURCE(345));
-  pSHUnicodeToUnicode = (void *)GetProcAddress(hShlwapi, (LPSTR)346);
+  pSHUnicodeToUnicode = (void *)GetProcAddress(hShlwapi, MAKEINTRESOURCE(346));
   pStrCatBuffA = (void *)GetProcAddress(hShlwapi, "StrCatBuffA");
   pStrCatBuffW = (void *)GetProcAddress(hShlwapi, "StrCatBuffW");
   pStrCpyNXA = (void *)GetProcAddress(hShlwapi, MAKEINTRESOURCE(399));

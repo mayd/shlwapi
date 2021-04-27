@@ -738,7 +738,7 @@ START_TEST(istream)
     return;
     }
 
-#ifdef TEST_SHWAPI_H 
+#ifdef TEST_SHLWAPI_H 
     pSHCreateStreamOnFileA = (void*)SHCreateStreamOnFileA;
     pSHCreateStreamOnFileW = (void*)SHCreateStreamOnFileW;
     pSHCreateStreamOnFileEx = (void*)SHCreateStreamOnFileEx;

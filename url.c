@@ -1581,8 +1581,8 @@ START_TEST(url)
   pUrlCanonicalizeW = (void *) GetProcAddress(hShlwapi, "UrlCanonicalizeW");
   pUrlApplySchemeA = (void *) GetProcAddress(hShlwapi, "UrlApplySchemeA");
   pUrlApplySchemeW = (void *) GetProcAddress(hShlwapi, "UrlApplySchemeW");
-  pParseURLA = (void*)GetProcAddress(hShlwapi, (LPCSTR)1);
-  pParseURLW = (void*)GetProcAddress(hShlwapi, (LPCSTR)2);
+  pParseURLA = (void*)GetProcAddress(hShlwapi, MAKEINTRESOURCE(1));
+  pParseURLW = (void*)GetProcAddress(hShlwapi, MAKEINTRESOURCE(2));
   pHashData = (void*)GetProcAddress(hShlwapi, "HashData");
 #endif
 

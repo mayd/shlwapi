@@ -1644,7 +1644,7 @@ START_TEST(path)
         return;
     }
 
-#ifdef TEST_SHWAPI_H
+#ifdef TEST_SHLWAPI_H
     pPathCreateFromUrlA = (void*)PathCreateFromUrlA;
     pPathCreateFromUrlW = (void*)PathCreateFromUrlW;
     pPathCreateFromUrlAlloc = (void*)PathCreateFromUrlAlloc;
@@ -1661,8 +1661,8 @@ START_TEST(path)
     pPathCreateFromUrlW = (void*)GetProcAddress(hShlwapi, "PathCreateFromUrlW");
     pPathCreateFromUrlAlloc = (void*)GetProcAddress(hShlwapi, "PathCreateFromUrlAlloc");
     pPathCombineW = (void*)GetProcAddress(hShlwapi, "PathCombineW");
-    pPathIsValidCharA = (void*)GetProcAddress(hShlwapi, (LPSTR)455);
-    pPathIsValidCharW = (void*)GetProcAddress(hShlwapi, (LPSTR)456);
+    pPathIsValidCharA = (void*)GetProcAddress(hShlwapi, MAKEINTRESOURCE(455));
+    pPathIsValidCharW = (void*)GetProcAddress(hShlwapi, MAKEINTRESOURCE(456));
     pPathAppendA = (void*)GetProcAddress(hShlwapi, "PathAppendA");
     pPathUnExpandEnvStringsA = (void*)GetProcAddress(hShlwapi, "PathUnExpandEnvStringsA");
     pPathUnExpandEnvStringsW = (void*)GetProcAddress(hShlwapi, "PathUnExpandEnvStringsW");

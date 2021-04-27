@@ -247,27 +247,27 @@ static BOOL InitFunctionPtrs(void)
       return FALSE;
   }
 
-  pSHLWAPI_17 = (void *)GetProcAddress( SHLWAPI_hshlwapi, (LPSTR)17);
+  pSHLWAPI_17 = (void *)GetProcAddress( SHLWAPI_hshlwapi, MAKEINTRESOURCE(17));
   ok(pSHLWAPI_17 != 0, "No Ordinal 17\n");
-  pSHLWAPI_18 = (void *)GetProcAddress( SHLWAPI_hshlwapi, (LPSTR)18);
+  pSHLWAPI_18 = (void *)GetProcAddress( SHLWAPI_hshlwapi, MAKEINTRESOURCE(18));
   ok(pSHLWAPI_18 != 0, "No Ordinal 18\n");
-  pSHLWAPI_19 = (void *)GetProcAddress( SHLWAPI_hshlwapi, (LPSTR)19);
+  pSHLWAPI_19 = (void *)GetProcAddress( SHLWAPI_hshlwapi, MAKEINTRESOURCE(19));
   ok(pSHLWAPI_19 != 0, "No Ordinal 19\n");
-  pSHLWAPI_20 = (void *)GetProcAddress( SHLWAPI_hshlwapi, (LPSTR)20);
+  pSHLWAPI_20 = (void *)GetProcAddress( SHLWAPI_hshlwapi, MAKEINTRESOURCE(20));
   ok(pSHLWAPI_20 != 0, "No Ordinal 20\n");
-  pSHLWAPI_21 = (void *)GetProcAddress( SHLWAPI_hshlwapi, (LPSTR)21);
+  pSHLWAPI_21 = (void *)GetProcAddress( SHLWAPI_hshlwapi, MAKEINTRESOURCE(21));
   ok(pSHLWAPI_21 != 0, "No Ordinal 21\n");
-  pSHLWAPI_22 = (void *)GetProcAddress( SHLWAPI_hshlwapi, (LPSTR)22);
+  pSHLWAPI_22 = (void *)GetProcAddress( SHLWAPI_hshlwapi, MAKEINTRESOURCE(22));
   ok(pSHLWAPI_22 != 0, "No Ordinal 22\n");
-  pSHLWAPI_166 = (void *)GetProcAddress( SHLWAPI_hshlwapi, (LPSTR)166);
+  pSHLWAPI_166 = (void *)GetProcAddress( SHLWAPI_hshlwapi, MAKEINTRESOURCE(166));
   ok(pSHLWAPI_166 != 0, "No Ordinal 166\n");
-  pSHLWAPI_184 = (void *)GetProcAddress( SHLWAPI_hshlwapi, (LPSTR)184);
+  pSHLWAPI_184 = (void *)GetProcAddress( SHLWAPI_hshlwapi, MAKEINTRESOURCE(184));
   ok(pSHLWAPI_184 != 0, "No Ordinal 184\n");
-  pSHLWAPI_212 = (void *)GetProcAddress( SHLWAPI_hshlwapi, (LPSTR)212);
+  pSHLWAPI_212 = (void *)GetProcAddress( SHLWAPI_hshlwapi, MAKEINTRESOURCE(212));
   ok(pSHLWAPI_212 != 0, "No Ordinal 212\n");
-  pSHLWAPI_213 = (void *)GetProcAddress( SHLWAPI_hshlwapi, (LPSTR)213);
+  pSHLWAPI_213 = (void *)GetProcAddress( SHLWAPI_hshlwapi, MAKEINTRESOURCE(213));
   ok(pSHLWAPI_213 != 0, "No Ordinal 213\n");
-  pSHLWAPI_214 = (void *)GetProcAddress( SHLWAPI_hshlwapi, (LPSTR)214);
+  pSHLWAPI_214 = (void *)GetProcAddress( SHLWAPI_hshlwapi, MAKEINTRESOURCE(214));
   ok(pSHLWAPI_214 != 0, "No Ordinal 214\n");
 
   return TRUE;

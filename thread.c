@@ -252,9 +252,9 @@ START_TEST(thread)
     }
 
 #ifdef TEST_SHLWAPI_H
-    pSHCreateThreadRef = (void *) GetProcAddress(hshlwapi, "SHCreateThreadRef");
-    pSHGetThreadRef = (void *) GetProcAddress(hshlwapi, "SHGetThreadRef");
-    pSHSetThreadRef = (void *) GetProcAddress(hshlwapi, "SHSetThreadRef");
+    pSHCreateThreadRef = (void *)SHCreateThreadRef;
+    pSHGetThreadRef = (void *)SHGetThreadRef;
+    pSHSetThreadRef = (void *)SHSetThreadRef;
 #else
     pSHCreateThreadRef = (void *) GetProcAddress(hshlwapi, "SHCreateThreadRef");
     pSHGetThreadRef = (void *) GetProcAddress(hshlwapi, "SHGetThreadRef");

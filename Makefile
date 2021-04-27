@@ -2,6 +2,7 @@
 
 TARGETS = assoc clist clsid generated istream ordinal path shreg string thread url defines
 TEST_OUTPUT = shlwapi-test-output.txt
+PATCH_FILE = shlwapi.h.patch
 
 SRCS = assoc.c clist.c clsid.c generated.c istream.c ordinal.c path.c shreg.c string.c thread.c url.c defines.c
 OBJS = $(SRCS:.c=.o)
@@ -15,7 +16,7 @@ all:  $(TARGETS)
 $(TARGETS): % : %.o
 	$(CC) -o $@ $< $(LDFLAGS)
 
-.PHONY: clean test
+.PHONY: clean test patch
 
 test:
 	@(printf "DEFINES\n"; ./defines; printf "\n"; \
@@ -32,6 +33,10 @@ test:
 	printf "URL\n"; ./url; printf "\n"; \
 	printf "\n";)
 
+patch:
+	@(diff -u /mingw64/x86_64-w64-mingw32/include/shlwapi.h ./shlwapi.h >$(PATCH_FILE); \
+	printf "Patch created in file $(PATCH_FILE)\n")
+
 clean:
-	@rm -f $(OBJS) $(EXES)
+	@rm -f $(OBJS) $(EXES) $(PATCH_FILE)
 
