@@ -9,17 +9,17 @@ Microsoft documentation and the implementation provided in Microsoft SDK version
 
 The unit tests here were adapted from the unit tests for [The Wine Project](https://www.winehq.org/) implementation of SHLWAPI:
 
-  * [assoc.c](https://source.winehq.org/source/dlls/shlwapi/assoc.c)
-  * [clist.c](https://source.winehq.org/source/dlls/shlwapi/clist.c)
-  * [clsid.c](https://source.winehq.org/source/dlls/shlwapi/clsid.c)
-  * [generated.c](https://source.winehq.org/source/dlls/shlwapi/generated.c)
-  * [istream.c](https://source.winehq.org/source/dlls/shlwapi/istream.c)
-  * [ordinal.c](https://source.winehq.org/source/dlls/shlwapi/ordinal.c)
-  * [path.c](https://source.winehq.org/source/dlls/shlwapi/path.c)
-  * [shreg.c](https://source.winehq.org/source/dlls/shlwapi/shreg.c)
-  * [string.c](https://source.winehq.org/source/dlls/shlwapi/string.c)
-  * [thread.c](https://source.winehq.org/source/dlls/shlwapi/thread.c)
-  * [url.c](https://source.winehq.org/source/dlls/shlwapi/url.c)
+  * [assoc.c](https://github.com/wine-mirror/wine/blob/master/dlls/shlwapi/tests/assoc.c)
+  * [clist.c](https://github.com/wine-mirror/wine/blob/master/dlls/shlwapi/tests/clist.c)
+  * [clsid.c](https://github.com/wine-mirror/wine/blob/master/dlls/shlwapi/tests/clsid.c)
+  * [generated.c](https://github.com/wine-mirror/wine/blob/master/dlls/shlwapi/tests/generated.c)
+  * [istream.c](https://github.com/wine-mirror/wine/blob/master/dlls/shlwapi/tests/istream.c)
+  * [ordinal.c](https://github.com/wine-mirror/wine/blob/master/dlls/shlwapi/tests/ordinal.c)
+  * [path.c](https://github.com/wine-mirror/wine/blob/master/dlls/shlwapi/tests/path.c)
+  * [shreg.c](https://github.com/wine-mirror/wine/blob/master/dlls/shlwapi/tests/shreg.c)
+  * [string.c](https://github.com/wine-mirror/wine/blob/master/dlls/shlwapi/tests/string.c)
+  * [thread.c](https://github.com/wine-mirror/wine/blob/master/dlls/shlwapi/tests/thread.c)
+  * [url.c](https://github.com/wine-mirror/wine/blob/master/dlls/shlwapi/tests/url.c)
 
 The Wine Project unit tests were modified to link functions from shlwapi.dll at compile time rather than dynamic loading at run time.
 
