@@ -967,7 +967,7 @@ LWSTDAPI PathMatchSpecExW(LPCWSTR pszFile, LPCWSTR pszSpec, DWORD dwFlags);
     STDMETHOD (GetEnum)(THIS_ ASSOCF flags,ASSOCENUM assocenum,LPCWSTR pszExtra,REFIID riid,LPVOID *ppvOut) PURE;
 
     END_INTERFACE
-  } IQueryAssociations_Type;
+  };
 
 #define AssocQueryString __MINGW_NAME_AW(AssocQueryString)
 #define AssocQueryStringByKey __MINGW_NAME_AW(AssocQueryStringByKey)
