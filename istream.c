@@ -739,9 +739,9 @@ START_TEST(istream)
     }
 
 #ifdef TEST_SHLWAPI_H 
-    pSHCreateStreamOnFileA = (void*)SHCreateStreamOnFileA;
-    pSHCreateStreamOnFileW = (void*)SHCreateStreamOnFileW;
-    pSHCreateStreamOnFileEx = (void*)SHCreateStreamOnFileEx;
+    pSHCreateStreamOnFileA = SHCreateStreamOnFileA;
+    pSHCreateStreamOnFileW = SHCreateStreamOnFileW;
+    pSHCreateStreamOnFileEx = SHCreateStreamOnFileEx;
 #else
     pSHCreateStreamOnFileA = (void*)GetProcAddress(hShlwapi, "SHCreateStreamOnFileA");
     pSHCreateStreamOnFileW = (void*)GetProcAddress(hShlwapi, "SHCreateStreamOnFileW");

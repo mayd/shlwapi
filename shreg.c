@@ -473,10 +473,10 @@ START_TEST(shreg)
     }
 
 #ifdef TEST_SHLWAPI_H
-    pSHCopyKeyA = (void*)SHCopyKeyA;
-    pSHRegGetPathA = (void*)SHRegGetPathA;
-    pSHRegGetValueA = (void*)SHRegGetValueA;
-    pSHRegCreateUSKeyW = (void*)SHRegCreateUSKeyW;
+    pSHCopyKeyA = SHCopyKeyA;
+    pSHRegGetPathA = SHRegGetPathA;
+    pSHRegGetValueA = SHRegGetValueA;
+    pSHRegCreateUSKeyW = SHRegCreateUSKeyW;
 #else
     pSHCopyKeyA = (void*)GetProcAddress(hshlwapi,"SHCopyKeyA");
     pSHRegGetPathA = (void*)GetProcAddress(hshlwapi,"SHRegGetPathA");

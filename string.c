@@ -40,7 +40,7 @@
     ok(ret == val1 || ret == val2, "Unexpected value of '" #expr "': " #fmt " instead of " #val1 " or " #val2 "\n", (unsigned int)(ret)); \
 } while (0);
 
-static BOOL    (WINAPI *pChrCmpIA)(CHAR, CHAR);
+static BOOL    (WINAPI *pChrCmpIA)(WORD, WORD);
 static BOOL    (WINAPI *pChrCmpIW)(WCHAR, WCHAR);
 static BOOL    (WINAPI *pIntlStrEqWorkerA)(BOOL,LPCSTR,LPCSTR,int);
 static BOOL    (WINAPI *pIntlStrEqWorkerW)(BOOL,LPCWSTR,LPCWSTR,int);
@@ -1493,32 +1493,32 @@ START_TEST(string)
 
   hShlwapi = GetModuleHandleA("shlwapi");
 #ifdef TEST_SHLWAPI_H
-  pChrCmpIA = (void *)ChrCmpIA;
-  pChrCmpIW = (void *)ChrCmpIW;
-  pIntlStrEqWorkerA = (void *)IntlStrEqWorkerA;
-  pIntlStrEqWorkerW = (void *)IntlStrEqWorkerW;
+  pChrCmpIA = ChrCmpIA;
+  pChrCmpIW = ChrCmpIW;
+  pIntlStrEqWorkerA = IntlStrEqWorkerA;
+  pIntlStrEqWorkerW = IntlStrEqWorkerW;
   pSHAnsiToAnsi = (void *)GetProcAddress(hShlwapi, MAKEINTRESOURCE(345));
   pSHUnicodeToUnicode = (void *)GetProcAddress(hShlwapi, MAKEINTRESOURCE(346));
-  pStrCatBuffA = (void *)StrCatBuffA;
-  pStrCatBuffW = (void *)StrCatBuffW;
+  pStrCatBuffA = StrCatBuffA;
+  pStrCatBuffW = StrCatBuffW;
   pStrCpyNXA = (void *)GetProcAddress(hShlwapi, MAKEINTRESOURCE(399));
   pStrCpyNXW = (void *)GetProcAddress(hShlwapi, MAKEINTRESOURCE(400));
-  pStrChrNW = (void *)StrChrNW;
-  pStrFormatByteSize64A = (void *)StrFormatByteSize64A;
-  pStrFormatKBSizeA = (void *)StrFormatKBSizeA;
-  pStrFormatKBSizeW = (void *)StrFormatKBSizeW;
-  pStrIsIntlEqualA = (void *)StrIsIntlEqualA;
-  pStrIsIntlEqualW = (void *)StrIsIntlEqualW;
-  pStrPBrkW = (void *)StrPBrkW;
-  pStrRetToBSTR = (void *)StrRetToBSTR;
-  pStrRetToBufA = (void *)StrRetToBufA;
-  pStrRetToBufW = (void *)StrRetToBufW;
-  pStrStrNW = (void *)StrStrNW;
-  pStrStrNIW = (void *)StrStrNIW;
-  pwnsprintfA = (void *)wnsprintfA;
-  pwnsprintfW = (void *)wnsprintfW;
-  pStrToInt64ExA = (void *)StrToInt64ExA;
-  pStrToInt64ExW = (void *)StrToInt64ExW;
+  pStrChrNW = StrChrNW;
+  pStrFormatByteSize64A = StrFormatByteSize64A;
+  pStrFormatKBSizeA = StrFormatKBSizeA;
+  pStrFormatKBSizeW = StrFormatKBSizeW;
+  pStrIsIntlEqualA = StrIsIntlEqualA;
+  pStrIsIntlEqualW = StrIsIntlEqualW;
+  pStrPBrkW = StrPBrkW;
+  pStrRetToBSTR = StrRetToBSTR;
+  pStrRetToBufA = StrRetToBufA;
+  pStrRetToBufW = StrRetToBufW;
+  pStrStrNW = StrStrNW;
+  pStrStrNIW = StrStrNIW;
+  pwnsprintfA = wnsprintfA;
+  pwnsprintfW = wnsprintfW;
+  pStrToInt64ExA = StrToInt64ExA;
+  pStrToInt64ExW = StrToInt64ExW;
 #else
   hShlwapi = GetModuleHandleA("shlwapi");
   pChrCmpIA = (void *)GetProcAddress(hShlwapi, "ChrCmpIA");

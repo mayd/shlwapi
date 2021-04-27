@@ -1645,17 +1645,17 @@ START_TEST(path)
     }
 
 #ifdef TEST_SHLWAPI_H
-    pPathCreateFromUrlA = (void*)PathCreateFromUrlA;
-    pPathCreateFromUrlW = (void*)PathCreateFromUrlW;
-    pPathCreateFromUrlAlloc = (void*)PathCreateFromUrlAlloc;
-    pPathCombineW = (void*)PathCombineW;
-    pPathIsValidCharA = (void*)GetProcAddress(hShlwapi, MAKEINTRESOURCE(455));
-    pPathIsValidCharW = (void*)GetProcAddress(hShlwapi, MAKEINTRESOURCE(456));
-    pPathAppendA = (void*)PathAppendA;
-    pPathUnExpandEnvStringsA = (void*)PathUnExpandEnvStringsA;
-    pPathUnExpandEnvStringsW = (void*)PathUnExpandEnvStringsW;
-    pPathIsRelativeA = (void*)PathIsRelativeA;
-    pPathIsRelativeW = (void*)PathIsRelativeW;
+    pPathCreateFromUrlA = PathCreateFromUrlA;
+    pPathCreateFromUrlW = PathCreateFromUrlW;
+    pPathCreateFromUrlAlloc = PathCreateFromUrlAlloc;
+    pPathCombineW = PathCombineW;
+    pPathIsValidCharA = (void *)GetProcAddress(hShlwapi, MAKEINTRESOURCE(455));
+    pPathIsValidCharW = (void *)GetProcAddress(hShlwapi, MAKEINTRESOURCE(456));
+    pPathAppendA = PathAppendA;
+    pPathUnExpandEnvStringsA = PathUnExpandEnvStringsA;
+    pPathUnExpandEnvStringsW = PathUnExpandEnvStringsW;
+    pPathIsRelativeA = PathIsRelativeA;
+    pPathIsRelativeW = PathIsRelativeW;
 #else
     pPathCreateFromUrlA = (void*)GetProcAddress(hShlwapi, "PathCreateFromUrlA");
     pPathCreateFromUrlW = (void*)GetProcAddress(hShlwapi, "PathCreateFromUrlW");

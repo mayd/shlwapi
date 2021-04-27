@@ -1541,27 +1541,27 @@ START_TEST(url)
   }
 
 #ifdef TEST_SHLWAPI_H
-  pUrlUnescapeA = (void *)UrlUnescapeA;
-  pUrlUnescapeW = (void *)UrlUnescapeW;
-  pUrlIsA = (void *)UrlIsA;
-  pUrlIsW = (void *)UrlIsW;
-  pUrlHashA = (void *)UrlHashA;
-  pUrlHashW = (void *)UrlHashW;
-  pUrlGetPartA = (void *)UrlGetPartA;
-  pUrlGetPartW = (void *)UrlGetPartW;
-  pUrlEscapeA = (void *)UrlEscapeA;
-  pUrlEscapeW = (void *)UrlEscapeW;
-  pUrlCreateFromPathA = (void *)UrlCreateFromPathA;
-  pUrlCreateFromPathW = (void *)UrlCreateFromPathW;
-  pUrlCombineA = (void *)UrlCombineA;
-  pUrlCombineW = (void *)UrlCombineW;
-  pUrlCanonicalizeA = (void *)UrlCanonicalizeA;
-  pUrlCanonicalizeW = (void *)UrlCanonicalizeW;
-  pUrlApplySchemeA = (void *)UrlApplySchemeA;
-  pUrlApplySchemeW = (void *)UrlApplySchemeW;
+  pUrlUnescapeA = UrlUnescapeA;
+  pUrlUnescapeW = UrlUnescapeW;
+  pUrlIsA = UrlIsA;
+  pUrlIsW = UrlIsW;
+  pUrlHashA = UrlHashA;
+  pUrlHashW = UrlHashW;
+  pUrlGetPartA = UrlGetPartA;
+  pUrlGetPartW = UrlGetPartW;
+  pUrlEscapeA = UrlEscapeA;
+  pUrlEscapeW = UrlEscapeW;
+  pUrlCreateFromPathA = UrlCreateFromPathA;
+  pUrlCreateFromPathW = UrlCreateFromPathW;
+  pUrlCombineA = UrlCombineA;
+  pUrlCombineW = UrlCombineW;
+  pUrlCanonicalizeA = UrlCanonicalizeA;
+  pUrlCanonicalizeW = UrlCanonicalizeW;
+  pUrlApplySchemeA = UrlApplySchemeA;
+  pUrlApplySchemeW = UrlApplySchemeW;
   pParseURLA = (void*)GetProcAddress(hShlwapi, MAKEINTRESOURCE(1));
   pParseURLW = (void*)GetProcAddress(hShlwapi, MAKEINTRESOURCE(2));
-  pHashData = (void*)HashData;
+  pHashData = HashData;
 #else
   pUrlUnescapeA = (void *) GetProcAddress(hShlwapi, "UrlUnescapeA");
   pUrlUnescapeW = (void *) GetProcAddress(hShlwapi, "UrlUnescapeW");

@@ -314,9 +314,9 @@ START_TEST(assoc)
     } 
 
 #ifdef TEST_SHLWAPI_H
-    pAssocQueryStringA = (void*)AssocQueryStringA;
-    pAssocQueryStringW = (void*)AssocQueryStringW;
-    pAssocCreate       = (void*)AssocCreate;
+    pAssocQueryStringA = AssocQueryStringA;
+    pAssocQueryStringW = AssocQueryStringW;
+    pAssocCreate       = AssocCreate;
 #else
     pAssocQueryStringA = (void*)GetProcAddress(hShlwapi, "AssocQueryStringA");
     pAssocQueryStringW = (void*)GetProcAddress(hShlwapi, "AssocQueryStringW");
