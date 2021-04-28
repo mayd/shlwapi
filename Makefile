@@ -8,7 +8,7 @@ SRCS = assoc.c clist.c clsid.c generated.c istream.c ordinal.c path.c shreg.c st
 OBJS = $(SRCS:.c=.o)
 EXES = $(TARGETS:=.exe)
 
-CFLAGS = -g -Wall -D_WIN32_IE=0x0700 -D_WIN32_WINNT=0x602 -DSTANDALONE -DTEST_SHLWAPI_H
+CFLAGS = -g -Wall -D_WIN32_IE=0x0700 -D_WIN32_WINNT=0x602 -DSTANDALONE -DTEST_SHLWAPI_H -I.
 LDFLAGS = -user32 -lkernel32 -lgdi32 -lole32 -loleaut32 -luuid -lshlwapi
 
 all:  $(TARGETS)
