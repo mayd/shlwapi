@@ -60,13 +60,13 @@ static LPSTR   (WINAPI *pStrRChrA)(LPCSTR,LPCSTR,WORD);
 static HRESULT (WINAPI *pStrRetToBSTR)(STRRET*,LPCITEMIDLIST,BSTR*);
 static HRESULT (WINAPI *pStrRetToBufA)(STRRET*,LPCITEMIDLIST,LPSTR,UINT);
 static HRESULT (WINAPI *pStrRetToBufW)(STRRET*,LPCITEMIDLIST,LPWSTR,UINT);
-static LPWSTR  (WINAPI *pStrStrNW)(LPCWSTR,LPCWSTR,UINT);
-static LPWSTR  (WINAPI *pStrStrNIW)(LPCWSTR,LPCWSTR,UINT);
+static PCWSTR  (WINAPI *pStrStrNW)(LPCWSTR,LPCWSTR,UINT);
+static PCWSTR  (WINAPI *pStrStrNIW)(LPCWSTR,LPCWSTR,UINT);
 static INT     (WINAPIV *pwnsprintfA)(LPSTR,INT,LPCSTR, ...);
 static INT     (WINAPIV *pwnsprintfW)(LPWSTR,INT,LPCWSTR, ...);
-static LPWSTR  (WINAPI *pStrChrNW)(LPCWSTR,WCHAR,UINT);
-static BOOL    (WINAPI *pStrToInt64ExA)(LPCSTR,DWORD,LONGLONG*);
-static BOOL    (WINAPI *pStrToInt64ExW)(LPCWSTR,DWORD,LONGLONG*);
+static PCWSTR  (WINAPI *pStrChrNW)(LPCWSTR,WCHAR,UINT);
+static BOOL    (WINAPI *pStrToInt64ExA)(LPCSTR,STIF_FLAGS,LONGLONG*);
+static BOOL    (WINAPI *pStrToInt64ExW)(LPCWSTR,STIF_FLAGS,LONGLONG*);
 
 static int strcmpW(const WCHAR *str1, const WCHAR *str2)
 {
@@ -434,7 +434,7 @@ static void test_StrCpyW(void)
 static void test_StrChrNW(void)
 {
     static const WCHAR string[] = {'T','e','s','t','i','n','g',' ','S','t','r','i','n','g',0};
-    LPWSTR p;
+    PCWSTR p;
 
     if (!pStrChrNW)
     {
@@ -1342,7 +1342,7 @@ static void test_StrStrNW(void)
         {beefW, 9, deadbeefW + 4},
     };
 
-    LPWSTR ret;
+    PCWSTR ret;
     UINT i;
 
     if (!pStrStrNW)
@@ -1436,7 +1436,7 @@ static void test_StrStrNIW(void)
         {beef_lowerW, 9, deadbeefW + 4},
     };
 
-    LPWSTR ret;
+    PCWSTR ret;
     UINT i;
 
     if (!pStrStrNIW)

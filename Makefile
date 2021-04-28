@@ -19,8 +19,8 @@ $(TARGETS): % : %.o shlwapi.h
 .PHONY: clean test patch
 
 test:
-	@(printf "C89 syntax check results:\n"; \
-	gcc -s -Wall -Wextra -std=c89 -pedantic -Wmissing-prototypes -Wstrict-prototypes -Wold-style-definition shlwapi.h; \
+	@(printf "Run C89 syntax check for shlwapi.h:\n"; \
+	gcc $(CFLAGS) -s -Wall -Wextra -std=c89 -pedantic -Wmissing-prototypes -Wstrict-prototypes -Wold-style-definition shlwapi.h; \
 	printf "finished syntax check\n\n";)
 	@(printf "DEFINES:\n"; ./defines; printf "\n"; \
 	printf "ASSOC:\n"; ./assoc; printf "\n"; \
@@ -37,7 +37,7 @@ test:
 	printf "\n";)
 
 patch:
-	@(diff -u /mingw64/x86_64-w64-mingw32/include/shlwapi.h ./shlwapi.h >$(PATCH_FILE); \
+	@(diff -uw doc/mingw64-shlwapi.h shlwapi.h >$(PATCH_FILE); \
 	printf "Patch created in file $(PATCH_FILE)\n")
 
 clean:

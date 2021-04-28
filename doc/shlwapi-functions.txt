@@ -170,7 +170,7 @@ SHAnsiToUnicode			missing
 SHAutoComplete			present
 SHCopyKeyA			present
 SHCopyKeyW			present
-SHCreateMemStream		present		
+SHCreateMemStream		error (SAL code included)
 SHCreateShellPalette		present
 SHCreateStreamOnFileA		present
 SHCreateStreamOnFileEx		present
