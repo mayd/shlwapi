@@ -426,7 +426,7 @@ static inline const char *wine_dbgstr_variant( const VARIANT *v )
     case VT_I2:
         return wine_dbg_sprintf( "%p {VT_I2: %d}", v, V_I2(v) );
     case VT_I4:
-        return wine_dbg_sprintf( "%p {VT_I4: %d}", v, V_I4(v) );
+        return wine_dbg_sprintf( "%p {VT_I4: %ld}", v, V_I4(v) );
     case VT_R4:
         return wine_dbg_sprintf( "%p {VT_R4: %f}", v, V_R4(v) );
     case VT_R8:
@@ -444,7 +444,7 @@ static inline const char *wine_dbgstr_variant( const VARIANT *v )
     case VT_DISPATCH:
         return wine_dbg_sprintf( "%p {VT_DISPATCH: %p}", v, V_DISPATCH(v) );
     case VT_ERROR:
-        return wine_dbg_sprintf( "%p {VT_ERROR: %08x}", v, V_ERROR(v) );
+        return wine_dbg_sprintf( "%p {VT_ERROR: %08lx}", v, V_ERROR(v) );
     case VT_BOOL:
         return wine_dbg_sprintf( "%p {VT_BOOL: %x}", v, V_BOOL(v) );
     case VT_UNKNOWN:
@@ -456,7 +456,7 @@ static inline const char *wine_dbgstr_variant( const VARIANT *v )
     case VT_UI2:
         return wine_dbg_sprintf( "%p {VT_UI2: %d}", v, V_UI2(v) );
     case VT_UI4:
-        return wine_dbg_sprintf( "%p {VT_UI4: %d}", v, V_UI4(v) );
+        return wine_dbg_sprintf( "%p {VT_UI4: %ld}", v, V_UI4(v) );
     case VT_I8:
         return wine_dbg_sprintf( "%p {VT_I8: %s}", v, wine_dbgstr_longlong(V_I8(v)) );
     case VT_UI8:

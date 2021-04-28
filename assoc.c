@@ -22,6 +22,10 @@
 #include "shlwapi.h"
 #include "shlguid.h"
 
+#ifdef TEST_SHLWAPI_H
+#define IQueryAssociations_Release(p) (p)->lpVtbl->Release(p)
+#endif
+
 #define expect(expected, got) ok ( expected == got, "Expected %ld, got %ld\n", (unsigned long)(expected), (unsigned long)(got))
 #define expect_hr(expected, got) ok ( expected == got, "Expected %08lx, got %08lx\n", (unsigned long)(expected), (unsigned long)(got))
 
