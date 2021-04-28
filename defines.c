@@ -4,6 +4,18 @@
 
 int main(int argc, char *argv[]) {
 
+#ifdef TEST_SHLWAPI_H
+  printf("TEST_SHLWAPI_H is defined\n");
+#else
+  printf("TEST_SHLWAPI_H is not defined\n");
+#endif
+
+#ifdef STANDALONE
+  printf("STANDALONE is defined\n");
+#else
+  printf("STANDALONE is not defined\n");
+#endif
+
 #ifdef _INC_SHLWAPI
   printf("_INC_SHLWAPI is defined\n");
 #else
@@ -74,6 +86,12 @@ int main(int argc, char *argv[]) {
   printf("_WIN32_IE=0x0%x\n", _WIN32_IE);
 #else
   printf("_WIN32_IE is not defined\n");
+#endif
+
+#ifdef COBJMACROS
+  printf("COBJMACROS is defined\n");
+#else
+  printf("COBJMACROS is not defined\n");
 #endif
 
 #ifdef NO_SHLWAPI_STRFCNS

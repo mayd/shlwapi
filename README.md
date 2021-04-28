@@ -29,3 +29,7 @@ To run the SHLWAPI unit tests run the following commands:
   2. `make test`
 
 This version of `shlwapi.h` was also used to build the `MovieShow` sample app from the [Win32++ Project](http://win32-framework.sourceforge.net/).
+
+28 April 2021:
+
+* Changed `shlwapi.h` to conform to C89 and added unit test to check conformance to C89.

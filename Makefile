@@ -13,24 +13,27 @@ LDFLAGS = -user32 -lkernel32 -lgdi32 -lole32 -loleaut32 -luuid -lshlwapi
 
 all:  $(TARGETS)
 
-$(TARGETS): % : %.o
+$(TARGETS): % : %.o shlwapi.h
 	$(CC) -o $@ $< $(LDFLAGS)
 
 .PHONY: clean test patch
 
 test:
-	@(printf "DEFINES\n"; ./defines; printf "\n"; \
-	printf "ASSOC\n"; ./assoc; printf "\n"; \
-	printf "CLIST\n"; ./clist; printf "\n"; \
-	printf "CLSID\n"; ./clsid; printf "\n"; \
-	printf "GENERATED\n"; ./generated; printf "\n"; \
-	printf "ISTREAM\n"; ./istream; printf "\n"; \
-	printf "ORDINAL\n"; ./ordinal; printf "\n"; \
-	printf "PATH\n"; ./path; printf "\n"; \
-	printf "SHREG\n"; ./shreg; printf "\n"; \
-	printf "STRING\n"; ./string; printf "\n"; \
-	printf "THREAD\n"; ./thread; printf "\n"; \
-	printf "URL\n"; ./url; printf "\n"; \
+	@(printf "C89 syntax check results:\n"; \
+	gcc -s -Wall -Wextra -std=c89 -pedantic -Wmissing-prototypes -Wstrict-prototypes -Wold-style-definition shlwapi.h; \
+	printf "finished syntax check\n\n";)
+	@(printf "DEFINES:\n"; ./defines; printf "\n"; \
+	printf "ASSOC:\n"; ./assoc; printf "\n"; \
+	printf "CLIST:\n"; ./clist; printf "\n"; \
+	printf "CLSID:\n"; ./clsid; printf "\n"; \
+	printf "GENERATED:\n"; ./generated; printf "\n"; \
+	printf "ISTREAM:\n"; ./istream; printf "\n"; \
+	printf "ORDINAL:\n"; ./ordinal; printf "\n"; \
+	printf "PATH:\n"; ./path; printf "\n"; \
+	printf "SHREG:\n"; ./shreg; printf "\n"; \
+	printf "STRING:\n"; ./string; printf "\n"; \
+	printf "THREAD:\n"; ./thread; printf "\n"; \
+	printf "URL:\n"; ./url; printf "\n"; \
 	printf "\n";)
 
 patch:
@@ -38,5 +41,5 @@ patch:
 	printf "Patch created in file $(PATCH_FILE)\n")
 
 clean:
-	@rm -f $(OBJS) $(EXES) $(PATCH_FILE)
+	@rm -f $(OBJS) $(EXES) $(PATCH_FILE) shlwapi.h.gch
 

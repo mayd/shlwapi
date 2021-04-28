@@ -15,9 +15,9 @@
 #include <objbase.h>
 #include <shtypes.h>
 
-#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM) // WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
-#if !defined(WINSHLWAPI) // !WINSHLWAPI
-#if !defined(_SHLWAPI_) // !_SHLWAPI_
+#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM) 
+#if !defined(WINSHLWAPI) 
+#if !defined(_SHLWAPI_) 
 #define LWSTDAPI EXTERN_C DECLSPEC_IMPORT HRESULT WINAPI
 #define LWSTDAPI_(type) EXTERN_C DECLSPEC_IMPORT type WINAPI
 #define LWSTDAPIV EXTERN_C DECLSPEC_IMPORT HRESULT STDAPIVCALLTYPE
@@ -27,27 +27,27 @@
 #define LWSTDAPI_(type) STDAPI_(type)
 #define LWSTDAPIV STDAPIV
 #define LWSTDAPIV_(type) STDAPIV_(type)
-#endif // !_SHLWAPI_
-#endif // !WINSHLWAPI
+#endif 
+#endif 
 
 #if !defined(_WINRESRC_)
 #if !defined(_WIN32_IE)
 #define _WIN32_IE 0x0601
-#endif // !_WIN32_IE
-#endif // !_WINRESRC_
+#endif 
+#endif 
 
 #include <pshpack8.h>
 
 #if !defined(__IBindCtx_FWD_DEFINED__)
 #define __IBindCtx_FWD_DEFINED__
 typedef interface IBindCtx IBindCtx;
-#endif // !__IBindCtx_FWD_DEFINED__
+#endif 
 
 #if defined(__cplusplus)
 extern "C" {
-#endif // __cplusplus
+#endif 
 
-#if !defined(NO_SHLWAPI_STRFCNS) // !NO_SHLWAPI_STRFCNS
+#if !defined(NO_SHLWAPI_STRFCNS) 
   LWSTDAPI_(LPSTR) StrChrA(LPCSTR lpStart,WORD wMatch);
   LWSTDAPI_(LPWSTR) StrChrW(LPCWSTR lpStart,WCHAR wMatch);
   LWSTDAPI_(LPSTR) StrChrIA(LPCSTR lpStart,WORD wMatch);
@@ -106,10 +106,10 @@ extern "C" {
   LWSTDAPI_(int) StrToIntW(LPCWSTR lpSrc);
   LWSTDAPI_(WINBOOL) StrToIntExA(LPCSTR pszString,DWORD dwFlags,int *piRet);
   LWSTDAPI_(WINBOOL) StrToIntExW(LPCWSTR pszString,DWORD dwFlags,int *piRet);
-#if (_WIN32_IE >= 0x0600) // _WIN32_IE
+#if (_WIN32_IE >= 0x0600) 
   LWSTDAPI_(WINBOOL) StrToInt64ExA(LPCSTR pszString,DWORD dwFlags,LONGLONG *pllRet);
   LWSTDAPI_(WINBOOL) StrToInt64ExW(LPCWSTR pszString,DWORD dwFlags,LONGLONG *pllRet);
-#endif // _WIN32_IE
+#endif 
   LWSTDAPI_(WINBOOL) StrTrimA(LPSTR psz,LPCSTR pszTrimChars);
   LWSTDAPI_(WINBOOL) StrTrimW(LPWSTR psz,LPCWSTR pszTrimChars);
   LWSTDAPI_(LPWSTR) StrCatW(LPWSTR psz1,LPCWSTR psz2);
@@ -143,7 +143,7 @@ extern "C" {
   LWSTDAPI SHStrDupA(LPCSTR psz,WCHAR **ppwsz);
   LWSTDAPI SHStrDupW(LPCWSTR psz,WCHAR **ppwsz);
 
-#if defined(__cplusplus) // __cplusplus
+#if defined(__cplusplus) 
   inline HRESULT SHLocalStrDupW(PCWSTR psz, PWSTR *ppsz) {
     *ppsz = StrDupW(psz);
     return *ppsz ? S_OK : E_OUTOFMEMORY;
@@ -155,13 +155,13 @@ extern "C" {
   }
 
 #define SHLocalStrDup __MINGW_NAME_AW(SHLocalStrDup)
-#endif // __cplusplus
+#endif 
 
   LWSTDAPI_(int) StrCmpLogicalW(LPCWSTR psz1,LPCWSTR psz2);
   LWSTDAPI_(DWORD) StrCatChainW(LPWSTR pszDst,DWORD cchDst,DWORD ichAt,LPCWSTR pszSrc);
   LWSTDAPI SHLoadIndirectString(LPCWSTR pszSource,LPWSTR pszOutBuf,UINT cchOutBuf,void **ppvReserved);
 
-#if (_WIN32_IE >= 0x0603) // _WIN32_IE
+#if (_WIN32_IE >= 0x0603) 
   LWSTDAPI_(WINBOOL) IsCharSpaceA(CHAR wch);
   LWSTDAPI_(WINBOOL) IsCharSpaceW(WCHAR wch);
 
@@ -176,7 +176,7 @@ extern "C" {
   LWSTDAPI_(int) StrCmpICW(LPCWSTR pszStr1,LPCWSTR pszStr2);
 
 #define StrCmpIC __MINGW_NAME_AW(StrCmpIC)
-#endif // _WIN32_IE
+#endif 
 
 #define StrChr __MINGW_NAME_AW(StrChr)
 #define StrRChr __MINGW_NAME_AW(StrRChr)
@@ -196,9 +196,9 @@ extern "C" {
 #define StrPBrk __MINGW_NAME_AW(StrPBrk)
 #define StrToIntEx __MINGW_NAME_AW(StrToIntEx)
 
-#if (_WIN32_IE >= 0x0600) // _WIN32_IE
+#if (_WIN32_IE >= 0x0600) 
 #define StrToInt64Ex __MINGW_NAME_AW(StrToInt64Ex)
-#endif // _WIN32_IE
+#endif 
 
 #define StrFromTimeInterval __MINGW_NAME_AW(StrFromTimeInterval)
 #define StrIntlEqN __MINGW_NAME_AW(StrIntlEqN)
@@ -214,11 +214,11 @@ extern "C" {
 #define wnsprintf __MINGW_NAME_AW(wnsprintf)
 #define StrIsIntlEqual __MINGW_NAME_AW(StrIsIntlEqual)
 
-#if defined(UNICODE) // UNICODE
+#if defined(UNICODE) 
 #define StrFormatByteSize64 StrFormatByteSizeW
 #else
 #define StrFormatByteSize64 StrFormatByteSize64A
-#endif // UNICODE
+#endif 
 
   LWSTDAPI_(WINBOOL) IntlStrEqWorkerA(WINBOOL fCaseSens,LPCSTR lpString1,LPCSTR lpString2,int nChar);
   LWSTDAPI_(WINBOOL) IntlStrEqWorkerW(WINBOOL fCaseSens,LPCWSTR lpString1,LPCWSTR lpString2,int nChar);
@@ -259,7 +259,7 @@ extern "C" {
 
 #define StrCatBuff __MINGW_NAME_AW(StrCatBuff)
 
-#if defined(UNICODE) // UNICODE
+#if defined(UNICODE) 
 #define StrCat StrCatW
 #define StrCmp StrCmpW
 #define StrCmpI StrCmpIW
@@ -271,11 +271,11 @@ extern "C" {
 #define StrCmpI lstrcmpiA
 #define StrCpy lstrcpyA
 #define StrCpyN lstrcpynA
-#endif // UNICODE
+#endif 
 
-#endif // !NO_SHLWAPI_STRFCNS
+#endif 
 
-#if (NTDDI_VERSION >= NTDDI_VISTASP1) // NTDDI_VERSION
+#if (NTDDI_VERSION >= NTDDI_VISTASP1) 
   enum tagSFBS_FLAGS {
       SFBS_FLAGS_ROUND_TO_NEAREST_DISPLAYED_DIGIT     = 0x0001,
       SFBS_FLAGS_TRUNCATE_UNDISPLAYED_DECIMAL_DIGITS  = 0x0002
@@ -284,9 +284,9 @@ extern "C" {
   typedef int SFBS_FLAGS;
 
   LWSTDAPI StrFormatByteSizeEx(ULONGLONG ull, SFBS_FLAGS flags, PWSTR pszBuf, UINT cchBuf);
-#endif //NTDDI_VERSION
+#endif 
 
-#if !defined(NO_SHLWAPI_PATH) // !NO_SHLWAPI_PATH
+#if !defined(NO_SHLWAPI_PATH) 
 
   LWSTDAPI_(LPSTR) PathAddBackslashA(LPSTR pszPath);
   LWSTDAPI_(LPWSTR) PathAddBackslashW(LPWSTR pszPath);
@@ -502,13 +502,13 @@ extern "C" {
 
 #define PathUnExpandEnvStrings __MINGW_NAME_AW(PathUnExpandEnvStrings)
 
-#if (_WIN32_IE >= _WIN32_IE_IE70) // _WIN32_IE
+#if (_WIN32_IE >= _WIN32_IE_IE70) 
 #define PMSF_NORMAL            0x00000000
 #define PMSF_MULTIPLE          0x00000001
 #define PMSF_DONT_STRIP_SPACES 0x00010000
 LWSTDAPI PathMatchSpecExA(LPCSTR pszFile, LPCSTR pszSpec, DWORD dwFlags);
 LWSTDAPI PathMatchSpecExW(LPCWSTR pszFile, LPCWSTR pszSpec, DWORD dwFlags);
-#endif // _WIN32_IE
+#endif 
 
 #define PathMatchSpecEx __MINGW_NAME_AW(PathMatchSpecEx)
 
@@ -556,24 +556,24 @@ LWSTDAPI PathMatchSpecExW(LPCWSTR pszFile, LPCWSTR pszSpec, DWORD dwFlags);
     URL_SCHEME_VBSCRIPT,
     URL_SCHEME_ABOUT,
     URL_SCHEME_RES,
-#if (_WIN32_IE >= _WIN32_IE_IE60) // _WIN32_IE
+#if (_WIN32_IE >= _WIN32_IE_IE60) 
     URL_SCHEME_MSSHELLROOTED,
     URL_SCHEME_MSSHELLIDLIST,
     URL_SCHEME_MSHELP,
-#endif // _WIN32_IE
-#if (_WIN32_IE >= _WIN32_IE_IE70) // _WIN32_IE
+#endif 
+#if (_WIN32_IE >= _WIN32_IE_IE70) 
     URL_SCHEME_MSSHELLDEVICE,
     URL_SCHEME_WILDCARD,
-#endif // _WIN32_IE
-#if (NTDDI_VERSION >= NTDDI_VISTA) // NTDDI_VERSION
+#endif 
+#if (NTDDI_VERSION >= NTDDI_VISTA) 
     URL_SCHEME_SEARCH_MS,
-#endif // NTDDI_VERSION
-#if (NTDDI_VERSION >= NTDDI_VISTASP1) // NTDDI_VERSION
+#endif 
+#if (NTDDI_VERSION >= NTDDI_VISTASP1) 
     URL_SCHEME_SEARCH,
-#endif // NTDDI_VERSION
-#if (NTDDI_VERSION >= NTDDI_WIN7) // NTDDI_VERSION
+#endif 
+#if (NTDDI_VERSION >= NTDDI_WIN7) 
     URL_SCHEME_KNOWNFOLDER,
-#endif // NTDDI_VERSION
+#endif 
     URL_SCHEME_MAXVALUE
   } URL_SCHEME;
 
@@ -635,9 +635,9 @@ LWSTDAPI PathMatchSpecExW(LPCWSTR pszFile, LPCWSTR pszSpec, DWORD dwFlags);
   LWSTDAPI UrlCreateFromPathW(LPCWSTR pszPath,LPWSTR pszUrl,LPDWORD pcchUrl,DWORD dwFlags);
   LWSTDAPI PathCreateFromUrlA(LPCSTR pszUrl,LPSTR pszPath,LPDWORD pcchPath,DWORD dwFlags);
   LWSTDAPI PathCreateFromUrlW(LPCWSTR pszUrl,LPWSTR pszPath,LPDWORD pcchPath,DWORD dwFlags);
-#if (_WIN32_IE >= _WIN32_IE_IE70) // _WIN32_IE
+#if (_WIN32_IE >= _WIN32_IE_IE70) 
   LWSTDAPI PathCreateFromUrlAlloc(PCWSTR pszIn, PWSTR *ppszOut, DWORD dwFlags);
-#endif // _WIN32_IE
+#endif 
   LWSTDAPI UrlHashA(LPCSTR pszUrl,LPBYTE pbHash,DWORD cbHash);
   LWSTDAPI UrlHashW(LPCWSTR pszUrl,LPBYTE pbHash,DWORD cbHash);
   LWSTDAPI UrlGetPartW(LPCWSTR pszIn,LPWSTR pszOut,LPDWORD pcchOut,DWORD dwPart,DWORD dwFlags);
@@ -646,9 +646,9 @@ LWSTDAPI PathMatchSpecExW(LPCWSTR pszFile, LPCWSTR pszSpec, DWORD dwFlags);
   LWSTDAPI UrlApplySchemeW(LPCWSTR pszIn,LPWSTR pszOut,LPDWORD pcchOut,DWORD dwFlags);
   LWSTDAPI HashData(LPBYTE pbData,DWORD cbData,LPBYTE pbHash,DWORD cbHash);
   LWSTDAPI UrlFixupW(PCWSTR pcszUrl, PWSTR pszTranslatedUrl, DWORD cchMax);
-#if defined(UNICODE) // UNICODE
+#if defined(UNICODE) 
 #define UrlFixup UrlFixupW
-#endif // UNICODE
+#endif 
 
 #define UrlCompare __MINGW_NAME_AW(UrlCompare)
 #define UrlCombine __MINGW_NAME_AW(UrlCombine)
@@ -689,7 +689,7 @@ LWSTDAPI PathMatchSpecExW(LPCWSTR pszFile, LPCWSTR pszSpec, DWORD dwFlags);
   LWSTDAPI ParseURLA(LPCSTR pcszURL, PARSEDURLA *ppu);
   LWSTDAPI ParseURLW(LPCWSTR pcszURL, PARSEDURLW *ppu);
 
-#if defined(UNICODE) // UNICODE
+#if defined(UNICODE) 
 #define ParseURL  ParseURLW
   typedef PARSEDURLW PARSEDURL;
   typedef PPARSEDURLW PPARSEDURL;
@@ -697,11 +697,11 @@ LWSTDAPI PathMatchSpecExW(LPCWSTR pszFile, LPCWSTR pszSpec, DWORD dwFlags);
 #define ParseURL  ParseURLA
   typedef PARSEDURLA PARSEDURL;
   typedef PPARSEDURLA PPARSEDURL;
-#endif // UNICODE
+#endif 
 
-#endif // !NO_SHLWAPI_PATH
+#endif 
 
-#if !defined(NO_SHLWAPI_REG) // !NO_SHLWAPI_REG
+#if !defined(NO_SHLWAPI_REG) 
 
   LWSTDAPI_(DWORD) SHDeleteEmptyKeyA(HKEY hkey, LPCSTR pszSubKey);
   LWSTDAPI_(DWORD) SHDeleteEmptyKeyW(HKEY hkey, LPCWSTR pszSubKey);
@@ -730,7 +730,7 @@ LWSTDAPI PathMatchSpecExW(LPCWSTR pszFile, LPCWSTR pszSpec, DWORD dwFlags);
 
 #define SHSetValue __MINGW_NAME_AW(SHSetValue)
 
-#if (_WIN32_IE >= 0x0602) // _WIN32_IE
+#if (_WIN32_IE >= 0x0602) 
 
   typedef DWORD SRRF;
 
@@ -765,7 +765,7 @@ LWSTDAPI PathMatchSpecExW(LPCWSTR pszFile, LPCWSTR pszSpec, DWORD dwFlags);
   LWSTDAPI_(LSTATUS) SHRegGetValueFromHKCUHKLM(PCWSTR pwszKey, PCWSTR pwszValue, SRRF srrfFlags,
                                         DWORD *pdwType, void *pvData, DWORD * pcbData);
   STDAPI_(BOOL) SHRegGetBoolValueFromHKCUHKLM(PCWSTR pszKey, PCWSTR pszValue, BOOL fDefault);
-#endif // _WIN32_IE
+#endif 
 
 #define SHQueryValueEx __MINGW_NAME_AW(SHQueryValueEx)
 #define SHEnumKeyEx __MINGW_NAME_AW(SHEnumKeyEx)
@@ -887,17 +887,17 @@ LWSTDAPI PathMatchSpecExW(LPCWSTR pszFile, LPCWSTR pszSpec, DWORD dwFlags);
     ASSOCSTR_CONTENTTYPE,
     ASSOCSTR_DEFAULTICON,
     ASSOCSTR_SHELLEXTENSION,
-#if _WIN32_WINNT >= 0x601 // _WIN32_WINNT
+#if _WIN32_WINNT >= 0x601 
     ASSOCSTR_DROPTARGET,
     ASSOCSTR_DELEGATEEXECUTE,
-#endif // _WIN32_WINNT
+#endif 
     ASSOCSTR_SUPPORTED_URI_PROTOCOLS,
-#if (NTDDI_VERSION >= NTDDI_WIN10) // NTDDI_VERSION
+#if (NTDDI_VERSION >= NTDDI_WIN10) 
     ASSOCSTR_PROGID,
     ASSOCSTR_APPID,
     ASSOCSTR_APPPUBLISHER,
     ASSOCSTR_APPICONREFERENCE,
-#endif // NTDDI_VERSION
+#endif 
     ASSOCSTR_MAX
   } ASSOCSTR;
 
@@ -946,7 +946,7 @@ LWSTDAPI PathMatchSpecExW(LPCWSTR pszFile, LPCWSTR pszSpec, DWORD dwFlags);
 
     FTA_NoRecentDocs            = 0x00100000,
     FTA_SafeForElevation        = 0x00200000,
-    FTA_AlwaysUseDirectInvoke   = 0x00400000,
+    FTA_AlwaysUseDirectInvoke   = 0x00400000
   } FILETYPEATTRIBUTEFLAGS;             
 
   DEFINE_ENUM_FLAG_OPERATORS(FILETYPEATTRIBUTEFLAGS)
@@ -982,23 +982,23 @@ LWSTDAPI PathMatchSpecExW(LPCWSTR pszFile, LPCWSTR pszSpec, DWORD dwFlags);
   LWSTDAPI AssocQueryKeyA(ASSOCF flags,ASSOCKEY key,LPCSTR pszAssoc,LPCSTR pszExtra,HKEY *phkeyOut);
   LWSTDAPI AssocQueryKeyW(ASSOCF flags,ASSOCKEY key,LPCWSTR pszAssoc,LPCWSTR pszExtra,HKEY *phkeyOut);
 
-#if (_WIN32_IE >= 0x0601) // _WIN32_IE
+#if (_WIN32_IE >= 0x0601) 
   LWSTDAPI_(WINBOOL) AssocIsDangerous(LPCWSTR pszAssoc);
-#endif // _WIN32_IE
+#endif 
 
-#if (_WIN32_IE >= 0x0603) // _WIN32_IE
+#if (_WIN32_IE >= 0x0603) 
   LWSTDAPI AssocGetPerceivedType(LPCWSTR pszExt, PERCEIVED *ptype, PERCEIVEDFLAG *pflag, LPWSTR *ppszType);
-#endif // _WIN32_IE
+#endif 
 
-#endif // !NO_SHLWAPI_REG
+#endif 
 
-#if !defined(NO_SHLWAPI_STREAM) // !NO_SHLWAPI_STREAM
-#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) // WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+#if !defined(NO_SHLWAPI_STREAM) 
+#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) 
 
-#if !defined(__IStream_FWD_DEFINED__) // !__IStream_FWD_DEFINED__
+#if !defined(__IStream_FWD_DEFINED__) 
 #define __IStream_FWD_DEFINED__
   typedef interface IStream IStream;
-#endif // !__IStream_FWD_DEFINED__
+#endif 
 
 #define SHOpenRegStream __MINGW_NAME_AW(SHOpenRegStream)
 #define SHOpenRegStream2 __MINGW_NAME_AW(SHOpenRegStream2)
@@ -1014,16 +1014,16 @@ LWSTDAPI PathMatchSpecExW(LPCWSTR pszFile, LPCWSTR pszSpec, DWORD dwFlags);
   LWSTDAPI SHCreateStreamOnFileA(LPCSTR pszFile, DWORD grfMode, struct IStream **ppstm);
   LWSTDAPI SHCreateStreamOnFileW(LPCWSTR pszFile, DWORD grfMode, struct IStream **ppstm);
 
-#if (_WIN32_IE >= 0x0600) // _WIN32_IE
+#if (_WIN32_IE >= 0x0600) 
   LWSTDAPI SHCreateStreamOnFileEx(LPCWSTR pszFile,DWORD grfMode, DWORD dwAttributes, WINBOOL fCreate,struct IStream *pstmTemplate, struct IStream **ppstm);
-#endif // _WIN32_IE
+#endif 
 
   LWSTDAPI_(IStream *) SHCreateMemStream(const BYTE *pInit, UINT cbInit);
 
-#endif // WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
-#endif // NO_SHLWAPI_STREAM
+#endif 
+#endif 
 
-#if !defined(NO_SHLWAPI_ISOS) // !NO_SHLWAPI_ISOS
+#if !defined(NO_SHLWAPI_ISOS) 
 #define OS_WINDOWS                  0
 #define OS_NT                       1
 #define OS_WIN95ORGREATER           2
@@ -1062,7 +1062,7 @@ LWSTDAPI PathMatchSpecExW(LPCWSTR pszFile, LPCWSTR pszSpec, DWORD dwFlags);
 #define OS_APPLIANCE                36
 
 LWSTDAPI_(BOOL) IsOS(DWORD dwOS);
-#endif // !NO_SHLWAPI_ISOS
+#endif 
 
   typedef enum {
     GLOBALCOUNTER_SEARCHMANAGER,
@@ -1118,35 +1118,35 @@ LWSTDAPI_(BOOL) IsOS(DWORD dwOS);
     GLOBALCOUNTER_COMMONPLACES_LIST_CACHE,
     GLOBALCOUNTER_PRIVATE_PROFILE_CACHE_MACHINEWIDE,
     GLOBALCOUNTER_ASSOCCHANGED,
-#if (NTDDI_VERSION >= NTDDI_WIN8) // NTDDI_VERSION >= NTDDI_WIN8
+#if (NTDDI_VERSION >= NTDDI_WIN8) 
     GLOBALCOUNTER_APP_ITEMS_STATE_STORE_CACHE,
     GLOBALCOUNTER_SETTINGSYNC_ENABLED,
     GLOBALCOUNTER_APPSFOLDER_FILETYPEASSOCIATION_COUNTER,
     GLOBALCOUNTER_USERINFOCHANGED,
-#if (NTDDI_VERSION >= NTDDI_WINBLUE) // NTDDI_VERSION >= NTDDI_WINBLUE
+#if (NTDDI_VERSION >= NTDDI_WINBLUE) 
     GLOBALCOUNTER_SYNC_ENGINE_INFORMATION_CACHE_MACHINEWIDE,
-#endif // NTDDI_VERSION >= NTDDI_WINBLUE
-#endif // NTDDI_VERSION >= NTDDI_WIN8
-#if (NTDDI_VERSION >= NTDDI_WIN10_RS1) // NTDDI_VERSION >= NTDDI_WIN10_RS1
+#endif 
+#endif 
+#if (NTDDI_VERSION >= NTDDI_WIN10_RS1) 
     GLOBALCOUNTER_BANNERS_DATAMODEL_CACHE_MACHINEWIDE,
-#endif // NTDDI_VERSION >= NTDDI_WIN10_RS1
+#endif 
     GLOBALCOUNTER_MAXIMUMVALUE
   } SHGLOBALCOUNTER;
 
-#if (NTDDI_VERSION >= NTDDI_WIN7) // NTDDI_VERSION >= NTDDI_WIN7
+#if (NTDDI_VERSION >= NTDDI_WIN7) 
   LWSTDAPI_(long) SHGlobalCounterGetValue(const SHGLOBALCOUNTER id);
   LWSTDAPI_(long) SHGlobalCounterIncrement(const SHGLOBALCOUNTER id);
   LWSTDAPI_(long) SHGlobalCounterDecrement(const SHGLOBALCOUNTER id);
-#endif // NTDDI_VERSION >= NTDDI_WIN7
+#endif 
 
-#if (_WIN32_IE >= 0x0603) // _WIN32_IE
+#if (_WIN32_IE >= 0x0603) 
   LWSTDAPI_(HANDLE) SHAllocShared(const void *pvData,DWORD dwSize,DWORD dwProcessId);
   LWSTDAPI_(WINBOOL) SHFreeShared(HANDLE hData,DWORD dwProcessId);
   LWSTDAPI_(void *) SHLockShared(HANDLE hData,DWORD dwProcessId);
   LWSTDAPI_(WINBOOL) SHUnlockShared(void *pvData);
-#endif // _WIN32_IE
+#endif 
 
-#if (_WIN32_IE >= 0x0501) // _WIN32_IE >= 0x0501
+#if (_WIN32_IE >= 0x0501) 
 #define PLATFORM_UNKNOWN 0
 #define PLATFORM_IE3 1
 #define PLATFORM_BROWSERONLY 1
@@ -1161,15 +1161,15 @@ LWSTDAPI_(BOOL) IsOS(DWORD dwOS);
 
   typedef const QITAB *LPCQITAB;
 
-#if !defined(OFFSETOFCLASS) // !OFFSETOFCLASS
+#if !defined(OFFSETOFCLASS) 
 #define OFFSETOFCLASS(base, derived) ((DWORD)(DWORD_PTR)(static_cast<base*>((derived*)8))-8)
-#endif // !OFFSETOFCLASS
+#endif 
 
-#if defined(__cplusplus) // __cplusplus
+#if defined(__cplusplus) 
 #define QITABENTMULTI(Cthis, Ifoo, Iimpl) { &__uuidof(Ifoo), OFFSETOFCLASS(Iimpl, Cthis) }
 #else
 #define QITABENTMULTI(Cthis, Ifoo, Iimpl) { (IID*) &IID_##Ifoo, OFFSETOFCLASS(Iimpl, Cthis) }
-#endif // __cplusplus
+#endif 
 #define QITABENTMULTI2(Cthis, Ifoo, Iimpl) { (IID*) &Ifoo, OFFSETOFCLASS(Iimpl, Cthis) }
 #define QITABENT(Cthis, Ifoo) QITABENTMULTI(Cthis, Ifoo, Ifoo)
 
@@ -1179,7 +1179,7 @@ LWSTDAPI_(BOOL) IsOS(DWORD dwOS);
   LWSTDAPI_(BOOL) SHIsLowMemoryMachine(DWORD dwType);
   LWSTDAPI_(int) GetMenuPosFromID(HMENU hMenu, UINT id);
   LWSTDAPI SHGetInverseCMAP(BYTE *pbMap, ULONG cbMap);
-#endif // _WIN32_IE >= 0x0501
+#endif 
 
 #define SHACF_DEFAULT 0x00000000
 #define SHACF_FILESYSTEM 0x00000001
@@ -1189,13 +1189,13 @@ LWSTDAPI_(BOOL) IsOS(DWORD dwOS);
 #define SHACF_USETAB 0x00000008
 #define SHACF_FILESYS_ONLY 0x00000010
 
-#if (_WIN32_IE >= 0x0600) // _WIN32_IE 
+#if (_WIN32_IE >= 0x0600) 
 #define SHACF_FILESYS_DIRS 0x00000020
-#endif // _WIN32_IE
+#endif 
 
-#if (_WIN32_IE >= 0x0700) // _WIN32_IE
+#if (_WIN32_IE >= 0x0700) 
 #define SHACF_VIRTUAL_NAMESPACE 0x00000040
-#endif // _WIN32_IE
+#endif 
 
 #define SHACF_AUTOSUGGEST_FORCE_ON 0x10000000
 #define SHACF_AUTOSUGGEST_FORCE_OFF 0x20000000
@@ -1207,53 +1207,53 @@ LWSTDAPI_(BOOL) IsOS(DWORD dwOS);
   LWSTDAPI SHGetThreadRef(IUnknown **ppunk);
   LWSTDAPI_(WINBOOL) SHSkipJunction(struct IBindCtx *pbc,const CLSID *pclsid);
 
-#if (_WIN32_IE >= 0x0603) // _WIN32_IE
+#if (_WIN32_IE >= 0x0603) 
   LWSTDAPI SHCreateThreadRef(LONG *pcRef,IUnknown **ppunk);
-#endif // _WIN32_IE
+#endif 
 
 #define CTF_INSIST 0x00000001
 #define CTF_THREAD_REF 0x00000002
 #define CTF_PROCESS_REF 0x00000004
 #define CTF_COINIT 0x00000008
-#if (_WIN32_IE >= _WIN32_IE_IE60) // _WIN32_IE
+#if (_WIN32_IE >= _WIN32_IE_IE60) 
 #define CTF_FREELIBANDEXIT 0x00000010
 #define CTF_REF_COUNTED 0x00000020
 #define CTF_WAIT_ALLOWCOM 0x00000040
-#endif // _WIN32_IE
-#if (_WIN32_IE >= _WIN32_IE_IE70) // _WIN32_IE
+#endif 
+#if (_WIN32_IE >= _WIN32_IE_IE70) 
 #define CTF_UNUSED 0x00000080
 #define CTF_INHERITWOW64 0x00000100
-#endif // _WIN32_IE
-#if (NTDDI_VERSION >= NTDDI_VISTA) // NTDDI_VERSION
+#endif 
+#if (NTDDI_VERSION >= NTDDI_VISTA) 
 #define CTF_WAIT_NO_REENTRANCY 0x00000200
-#endif // NTDDI_VERSION
-#if (NTDDI_VERSION >= NTDDI_WIN7) // NTDDI_VERSION
+#endif 
+#if (NTDDI_VERSION >= NTDDI_WIN7) 
 #define CTF_KEYBOARD_LOCALE 0x00000400
 #define CTF_OLEINITIALIZE 0x00000800
 #define CTF_COINIT_MTA 0x00001000
 #define CTF_NOADDREFLIB 0x00002000
-#endif // NTDDI_VERSION
+#endif 
 
   typedef DWORD SHCT_FLAGS;
 
   LWSTDAPI_(WINBOOL) SHCreateThread(LPTHREAD_START_ROUTINE pfnThreadProc,void *pData, SHCT_FLAGS dwFlags,LPTHREAD_START_ROUTINE pfnCallback);
   LWSTDAPI_(BOOL) SHCreateThreadWithHandle(LPTHREAD_START_ROUTINE pfnThreadProc, void *pData, SHCT_FLAGS dwflags, LPTHREAD_START_ROUTINE pfnCallback, HANDLE *pHandle);
 
-#if (NTDDI_VERSION >= NTDDI_WIN8) // NTDDI_VERSION 
+#if (NTDDI_VERSION >= NTDDI_WIN8) 
   LWSTDAPI_(void) SetProcessReference(IUnknown *punk);
   LWSTDAPI GetProcessReference(IUnknown **punk);
-#endif // NTDDI_VERSION
+#endif 
 
-#if (_WIN32_IE >= _WIN32_IE_IE60) // _WIN32_IE
+#if (_WIN32_IE >= _WIN32_IE_IE60) 
   LWSTDAPI SHReleaseThreadRef(void);
-#endif // _WIN32_IE
+#endif 
 
-#if !defined(NO_SHLWAPI_GDI) // !NO_SHLWAPI_GDI
+#if !defined(NO_SHLWAPI_GDI) 
   LWSTDAPI_(HPALETTE) SHCreateShellPalette(HDC hdc);
   LWSTDAPI_(void) ColorRGBToHLS(COLORREF clrRGB,WORD *pwHue,WORD *pwLuminance,WORD *pwSaturation);
   LWSTDAPI_(COLORREF) ColorHLSToRGB(WORD wHue,WORD wLuminance,WORD wSaturation);
   LWSTDAPI_(COLORREF) ColorAdjustLuma(COLORREF clrRGB,int n,WINBOOL fScale);
-#endif // !NO_SHLWAPI_GDI
+#endif 
 
   typedef struct _DLLVERSIONINFO {
     DWORD cbSize;
@@ -1284,27 +1284,27 @@ LWSTDAPI_(BOOL) IsOS(DWORD dwOS);
 
   STDAPI DllInstall(WINBOOL bInstall,LPCWSTR pszCmdLine);
 
-#if (_WIN32_IE >= 0x0602) // _WIN32_IE
+#if (_WIN32_IE >= 0x0602) 
   LWSTDAPI_(WINBOOL) IsInternetESCEnabled(void);
-#endif // _WIN32_IE
+#endif 
 
-#if !defined(NO_SHLWAPI_HTTP) // !NO_SHLWAPI_HTTP
+#if !defined(NO_SHLWAPI_HTTP) 
 
-#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP) // WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)
+#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP) 
 
-#if (_WIN32_IE >= 0x0603) // _WIN32_IE
+#if (_WIN32_IE >= 0x0603) 
 #define GetAcceptLanguages __MINGW_NAME_AW(GetAcceptLanguages)
   LWSTDAPI GetAcceptLanguagesA(LPSTR psz,DWORD *pcch);
   LWSTDAPI GetAcceptLanguagesW(LPWSTR psz,DWORD *pcch);
-#endif // _WIN32_IE
+#endif 
 
-#endif // WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)
+#endif 
 
-#endif // !NO_SHLWAPI_HTTP
+#endif 
 
-#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) // WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) 
 
-#if (_WIN32_IE < _WIN32_IE_IE70) && !defined(NO_SHLWAPI_STOPWATCH) // !NO_SHLWAPI_STOPWATCH
+#if (_WIN32_IE < _WIN32_IE_IE70) && !defined(NO_SHLWAPI_STOPWATCH) 
 #define SPMODE_SHELL      0x00000001
 #define SPMODE_DEBUGOUT   0x00000002
 #define SPMODE_TEST       0x00000004
@@ -1320,13 +1320,13 @@ LWSTDAPI_(BOOL) IsOS(DWORD dwOS);
 #define SPMODE_MEMWATCH   0x00001000
 #define SPMODE_DBMON      0x00002000
 #define SPMODE_MULTISTOP  0x00004000
-#if !defined(NO_ETW_TRACING) // !NO_ETW_TRACING
+#if !defined(NO_ETW_TRACING) 
 #define SPMODE_EVENTTRACE 0x00008000
-#endif // !NO_ETW_TRACING
+#endif 
 
   DWORD WINAPI StopWatchMode(void);
   DWORD WINAPI StopWatchFlush(void);
-#endif // !NO_SHLWAPI_STOPWATCH
+#endif 
 
   LWSTDAPI_(void) IUnknown_Set(IUnknown **ppunk, IUnknown *punk);
   LWSTDAPI_(void) IUnknown_AtomicRelease(void **ppunk);
@@ -1341,25 +1341,25 @@ LWSTDAPI_(BOOL) IsOS(DWORD dwOS);
   LWSTDAPI IStream_Reset(IStream *pstm);
   LWSTDAPI IStream_Size(IStream *pstm, ULARGE_INTEGER *pui);
 
-#if !defined(__IConnectionPoint_FWD_DEFINED__) // !__IConnectionPoint_FWD_DEFINED__
+#if !defined(__IConnectionPoint_FWD_DEFINED__) 
 #define __IConnectionPoint_FWD_DEFINED__
   typedef interface IConnectionPoint IConnectionPoint;
-#endif // !__IConnectionPoint_FWD_DEFINED__
+#endif 
 
   LWSTDAPI ConnectToConnectionPoint(IUnknown *punk, REFIID riidEvent, BOOL fConnect, IUnknown *punkTarget, DWORD *pdwCookie, IConnectionPoint **ppcpOut);
 
-#if (NTDDI_VERSION >= NTDDI_VISTA) // NTDDI_VERSION
+#if (NTDDI_VERSION >= NTDDI_VISTA) 
   LWSTDAPI IStream_ReadPidl(IStream *pstm, PIDLIST_RELATIVE *ppidlOut);
   LWSTDAPI IStream_WritePidl(IStream *pstm, PCUIDLIST_RELATIVE pidlWrite);
-#endif // NTDDI_VERSION
+#endif 
 
-#if (_WIN32_IE >= _WIN32_IE_IE70) // _WIN32_IE
+#if (_WIN32_IE >= _WIN32_IE_IE70) 
   LWSTDAPI IStream_ReadStr(IStream *pstm, PWSTR *ppsz);
   LWSTDAPI IStream_WriteStr(IStream *pstm, PCWSTR psz);
   LWSTDAPI IStream_Copy(IStream *pstmFrom, IStream *pstmTo, DWORD cb);
-#endif // _WIN32_IE
+#endif 
 
-#if (_WIN32_IE >= 0x0601) // _WIN32_IE
+#if (_WIN32_IE >= 0x0601) 
 #define SHGVSPB_PERUSER         0x00000001
 #define SHGVSPB_ALLUSERS        0x00000002
 #define SHGVSPB_PERFOLDER       0x00000004
@@ -1374,7 +1374,7 @@ LWSTDAPI_(BOOL) IsOS(DWORD dwOS);
 #define SHGVSPB_GLOBALDEAFAULTS (SHGVSPB_ALLUSERS | SHGVSPB_ALLFOLDERS)
 
   LWSTDAPI SHGetViewStatePropertyBag(LPCITEMIDLIST pidl,LPCWSTR pszBagName,DWORD dwFlags,REFIID riid,void **ppv);
-#endif // _WIN32_IE
+#endif 
 
 #define FDTF_SHORTTIME          0x00000001
 #define FDTF_SHORTDATE          0x00000002
@@ -1391,16 +1391,16 @@ LWSTDAPI_(BOOL) IsOS(DWORD dwOS);
 
 #define SHFormatDateTime __MINGW_NAME_AW(SHFormatDateTime)
 
-#endif // WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+#endif 
 
-#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM) // WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM) 
+#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM) 
 
   LWSTDAPI_(int) SHAnsiToUnicode(PCSTR pszSrc, PWSTR pwszDst, int cwchBuf);
   LWSTDAPI_(int) SHAnsiToAnsi(PCSTR pszSrc, PSTR pszDst, int cchBuf);
   LWSTDAPI_(int) SHUnicodeToAnsi(PCWSTR pwszSrc, PSTR pszDst, int cchBuf);
   LWSTDAPI_(int) SHUnicodeToUnicode(PCWSTR pwzSrc, PWSTR pwzDst, int cwchBuf);
 
-#if defined(UNICODE) // UNICODE
+#if defined(UNICODE) 
 #define SHTCharToUnicode(wzSrc, wzDest, cchSize) SHUnicodeToUnicode(wzSrc, wzDest, cchSize)
 #define SHTCharToAnsi(wzSrc, szDest, cchSize)    SHUnicodeToAnsi(wzSrc, szDest, cchSize)
 #define SHUnicodeToTChar(wzSrc, wzDest, cchSize) SHUnicodeToUnicode(wzSrc, wzDest, cchSize)
@@ -1410,11 +1410,11 @@ LWSTDAPI_(BOOL) IsOS(DWORD dwOS);
 #define SHTCharToAnsi(szSrc, szDest, cchSize)    SHAnsiToAnsi(szSrc, szDest, cchSize)
 #define SHUnicodeToTChar(wzSrc, szDest, cchSize) SHUnicodeToAnsi(wzSrc, szDest, cchSize)
 #define SHAnsiToTChar(szSrc, szDest, cchSize)    SHAnsiToAnsi(szSrc, szDest, cchSize)
-#endif // UNICODE
+#endif 
 
-#endif // WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+#endif 
 
-#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) // WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) 
 
 LWSTDAPI_(int) SHMessageBoxCheckA(HWND hwnd, LPCSTR pszText, LPCSTR pszCaption, UINT uType, int iDefault, LPCSTR pszRegVal);
 LWSTDAPI_(int) SHMessageBoxCheckW(HWND hwnd, LPCWSTR pszText, LPCWSTR pszCaption, UINT uType, int iDefault, LPCWSTR pszRegVal);
@@ -1431,16 +1431,16 @@ LWSTDAPI_(WCHAR) SHStripMneumonicW(LPWSTR pszMenu);
 
 #define SHStripMneumonic __MINGW_NAME_AW(SHStripMneumonic)
 
-#endif // WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+#endif 
 
-#if defined(__cplusplus) // __cplusplus
+#if defined(__cplusplus) 
 }
-#endif // __cplusplus
+#endif 
 
 #include <poppack.h>
 
-#endif // WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
+#endif 
 
-#endif // NOSHLWAPI
+#endif 
 
-#endif // _INC_SHLWAPI
+#endif 
