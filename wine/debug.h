@@ -145,7 +145,7 @@ struct __wine_debug_channel
 
 extern unsigned char __cdecl __wine_dbg_get_channel_flags( struct __wine_debug_channel *channel );
 #ifdef TEST_SHLWAPI_H
-#define __wine_dbg_strdup strdup
+#define __wine_dbg_strdup __builtin_strdup
 #else
 extern const char * __cdecl __wine_dbg_strdup( const char *str );
 #endif

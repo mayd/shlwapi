@@ -13,7 +13,7 @@ LDFLAGS = -user32 -lkernel32 -lgdi32 -lole32 -loleaut32 -luuid -lshlwapi
 
 all:  $(TARGETS)
 
-$(TARGETS): % : %.o shlwapi.h
+$(TARGETS): % : %.o shlwapi.h wine/debug.h wine/test.h
 	$(CC) -o $@ $< $(LDFLAGS)
 
 .PHONY: clean test patch
