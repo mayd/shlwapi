@@ -765,7 +765,7 @@ LWSTDAPI PathMatchSpecExW(LPCWSTR pszFile, LPCWSTR pszSpec, DWORD dwFlags);
 
   LWSTDAPI_(LSTATUS) SHRegGetValueFromHKCUHKLM(PCWSTR pwszKey, PCWSTR pwszValue, SRRF srrfFlags,
                                         DWORD *pdwType, void *pvData, DWORD * pcbData);
-  STDAPI_(BOOL) SHRegGetBoolValueFromHKCUHKLM(PCWSTR pszKey, PCWSTR pszValue, BOOL fDefault);
+  STDAPI_(WINBOOL) SHRegGetBoolValueFromHKCUHKLM(PCWSTR pszKey, PCWSTR pszValue, WINBOOL fDefault);
 #endif 
 
 #define SHQueryValueEx __MINGW_NAME_AW(SHQueryValueEx)
@@ -1061,7 +1061,7 @@ LWSTDAPI PathMatchSpecExW(LPCWSTR pszFile, LPCWSTR pszSpec, DWORD dwFlags);
 #define OS_MEDIACENTER              35
 #define OS_APPLIANCE                36
 
-  LWSTDAPI_(BOOL) IsOS(DWORD dwOS);
+  LWSTDAPI_(WINBOOL) IsOS(DWORD dwOS);
 #endif 
 
   typedef enum {
@@ -1175,7 +1175,7 @@ LWSTDAPI PathMatchSpecExW(LPCWSTR pszFile, LPCWSTR pszSpec, DWORD dwFlags);
   STDAPI QISearch(void *that, LPCQITAB pqit, REFIID riid, void **ppv);
 
 #define ILMM_IE4 0
-  LWSTDAPI_(BOOL) SHIsLowMemoryMachine(DWORD dwType);
+  LWSTDAPI_(WINBOOL) SHIsLowMemoryMachine(DWORD dwType);
   LWSTDAPI_(int) GetMenuPosFromID(HMENU hMenu, UINT id);
   LWSTDAPI SHGetInverseCMAP(BYTE *pbMap, ULONG cbMap);
 #endif 
@@ -1236,7 +1236,7 @@ LWSTDAPI PathMatchSpecExW(LPCWSTR pszFile, LPCWSTR pszSpec, DWORD dwFlags);
   typedef DWORD SHCT_FLAGS;
 
   LWSTDAPI_(WINBOOL) SHCreateThread(LPTHREAD_START_ROUTINE pfnThreadProc,void *pData, SHCT_FLAGS dwFlags,LPTHREAD_START_ROUTINE pfnCallback);
-  LWSTDAPI_(BOOL) SHCreateThreadWithHandle(LPTHREAD_START_ROUTINE pfnThreadProc, void *pData, SHCT_FLAGS dwflags, LPTHREAD_START_ROUTINE pfnCallback, HANDLE *pHandle);
+  LWSTDAPI_(WINBOOL) SHCreateThreadWithHandle(LPTHREAD_START_ROUTINE pfnThreadProc, void *pData, SHCT_FLAGS dwflags, LPTHREAD_START_ROUTINE pfnCallback, HANDLE *pHandle);
 
 #if (NTDDI_VERSION >= NTDDI_WIN8) 
   LWSTDAPI_(void) SetProcessReference(IUnknown *punk);
@@ -1345,7 +1345,7 @@ LWSTDAPI PathMatchSpecExW(LPCWSTR pszFile, LPCWSTR pszSpec, DWORD dwFlags);
   typedef interface IConnectionPoint IConnectionPoint;
 #endif 
 
-  LWSTDAPI ConnectToConnectionPoint(IUnknown *punk, REFIID riidEvent, BOOL fConnect, IUnknown *punkTarget, DWORD *pdwCookie, IConnectionPoint **ppcpOut);
+  LWSTDAPI ConnectToConnectionPoint(IUnknown *punk, REFIID riidEvent, WINBOOL fConnect, IUnknown *punkTarget, DWORD *pdwCookie, IConnectionPoint **ppcpOut);
 
 #if (NTDDI_VERSION >= NTDDI_VISTA) 
   LWSTDAPI IStream_ReadPidl(IStream *pstm, PIDLIST_RELATIVE *ppidlOut);

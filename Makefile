@@ -1,10 +1,10 @@
 #!make
 
-TARGETS = assoc clist clsid generated istream ordinal path shreg string thread url defines
+TARGETS = assoc clist clsid generated istream ordinal path shreg string thread url defines os
 TEST_OUTPUT = shlwapi-test-output.txt
 PATCH_FILE = shlwapi.h.patch
 
-SRCS = assoc.c clist.c clsid.c generated.c istream.c ordinal.c path.c shreg.c string.c thread.c url.c defines.c
+SRCS = assoc.c clist.c clsid.c generated.c istream.c ordinal.c path.c shreg.c string.c thread.c url.c defines.c os.c
 OBJS = $(SRCS:.c=.o)
 EXES = $(TARGETS:=.exe)
 
@@ -33,6 +33,7 @@ test:
 	printf "SHREG:\n"; ./shreg; printf "\n"; \
 	printf "STRING:\n"; ./string; printf "\n"; \
 	printf "THREAD:\n"; ./thread; printf "\n"; \
+	printf "OS:\n"; ./os; printf "\n"; \
 	printf "URL:\n"; ./url; printf "\n"; \
 	printf "\n";)
 
