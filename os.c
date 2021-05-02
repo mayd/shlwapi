@@ -3,6 +3,8 @@
 #include <stdio.h>
 #include <stdarg.h>
 #include <processthreadsapi.h>
+//#include <lsalookup.h>
+#include <ntsecapi.h>
 
 #define COBJMACROS
 #define CONST_VTABLE
@@ -17,8 +19,65 @@
 
 static WINBOOL(WINAPI *pIsOS)(DWORD);
 
-static void test_IsOS(void)
-{
+WINBOOL Is_WinVer_or_Later (DWORD dwOSMajor, DWORD dwOSMinor, DWORD wSPMajor, DWORD wSPMinor, BYTE bProdType) {
+  // Based on code from <https://docs.microsoft.com/en-us/windows/win32/sysinfo/verifying-the-system-version>
+
+  OSVERSIONINFOEX osvi;
+  DWORDLONG dwlConditionMask = 0;
+  int op=VER_GREATER_EQUAL;
+
+  // Initialize the OSVERSIONINFOEX structure.
+
+  ZeroMemory(&osvi, sizeof(OSVERSIONINFOEX));
+  osvi.dwOSVersionInfoSize = sizeof(OSVERSIONINFOEX);
+  osvi.dwMajorVersion = dwOSMajor;
+  osvi.dwMinorVersion = dwOSMinor;
+  osvi.wServicePackMajor = wSPMajor;
+  osvi.wServicePackMinor = wSPMinor;
+  osvi.wProductType = bProdType;
+
+  // Initialize the condition mask.
+
+  VER_SET_CONDITION( dwlConditionMask, VER_MAJORVERSION, op );
+  VER_SET_CONDITION( dwlConditionMask, VER_MINORVERSION, op );
+  VER_SET_CONDITION( dwlConditionMask, VER_SERVICEPACKMAJOR, op );
+  VER_SET_CONDITION( dwlConditionMask, VER_SERVICEPACKMINOR, op );
+
+  // Perform the test.
+
+  return VerifyVersionInfo(
+    &osvi, 
+    VER_MAJORVERSION | VER_MINORVERSION | 
+    VER_SERVICEPACKMAJOR | VER_SERVICEPACKMINOR,
+    dwlConditionMask);
+}
+
+WINBOOL ComputerBelongsToDomain() {
+  // Code copied from <https://stackoverflow.com/questions/206172/how-do-you-programmatically-determine-whether-a-windows-computer-is-a-member-of>
+  WINBOOL ret = FALSE;
+
+  LSA_OBJECT_ATTRIBUTES objectAttributes;
+  LSA_HANDLE policyHandle;
+  NTSTATUS status;
+  PPOLICY_PRIMARY_DOMAIN_INFO info;
+
+  // Object attributes are reserved, so initialize to zeros.
+  ZeroMemory(&objectAttributes, sizeof(objectAttributes));
+  status = LsaOpenPolicy(NULL, &objectAttributes, GENERIC_READ | POLICY_VIEW_LOCAL_INFORMATION, &policyHandle);
+  if (!status) {
+    status = LsaQueryInformationPolicy(policyHandle, PolicyPrimaryDomainInformation, (LPVOID*)&info);
+    if (!status) {
+      if (info->Sid)
+          ret = TRUE;
+      LsaFreeMemory(info);
+    }
+    LsaClose(policyHandle);
+  }
+
+  return ret;
+}
+
+static void test_IsOS(void) {
   HANDLE hProcess;
   BOOL bWow64Process;
 
@@ -40,10 +99,11 @@ static void test_IsOS(void)
   } else {
     ok (IsOS(OS_WOW6432) == bWow64Process, "IsOS: OS_WOW6432 failed\n");
   }
+  ok (IsOS(OS_WIN2000ORGREATER) == Is_WinVer_or_Later(5, 0, 0, 0, VER_NT_SERVER), "IsOS: OS_WIN2000ORGREATER failed\n");
+  ok (IsOS(OS_DOMAINMEMBER) == ComputerBelongsToDomain(), "IsOS: OS_DOMAINMEMBER failed\n");
 }
 
-START_TEST(thread)
-{
+START_TEST(thread) {
     HMODULE hshlwapi = GetModuleHandleA("shlwapi.dll");
     if (!hshlwapi)
       hshlwapi = LoadLibrary(TEXT("shlwapi.dll"));
